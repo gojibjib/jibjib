@@ -1,4 +1,4 @@
-package de.cdvost.jibjib.domain.repository;
+package de.cdvost.jibjib.repository.web;
 
 public class BirdWebServiceImpl implements IBirdWebService {
     @Override

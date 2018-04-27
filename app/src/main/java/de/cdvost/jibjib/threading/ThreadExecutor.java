@@ -1,4 +1,4 @@
-package de.cdvost.jibjib.domain.executor.impl;
+package de.cdvost.jibjib.threading;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

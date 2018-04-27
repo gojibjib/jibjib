@@ -9,8 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.cdvost.jibjib.R;
-import de.cdvost.jibjib.domain.executor.MainThread;
-import de.cdvost.jibjib.domain.executor.impl.ThreadExecutor;
+import de.cdvost.jibjib.threading.ThreadExecutor;
 import de.cdvost.jibjib.presentation.presenter.IMatchViewPresenter;
 import de.cdvost.jibjib.presentation.presenter.MatchViewPresenter;
 import de.cdvost.jibjib.threading.MainThreadImpl;
