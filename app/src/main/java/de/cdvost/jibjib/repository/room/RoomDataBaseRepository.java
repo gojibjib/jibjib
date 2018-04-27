@@ -1,4 +1,4 @@
-package de.cdvost.jibjib.repository.db;
+package de.cdvost.jibjib.repository.room;
 
 import java.util.Arrays;
 

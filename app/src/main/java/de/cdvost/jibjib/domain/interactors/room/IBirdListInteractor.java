@@ -1,4 +1,4 @@
-package de.cdvost.jibjib.domain.interactors.db;
+package de.cdvost.jibjib.domain.interactors.room;
 
 import de.cdvost.jibjib.domain.interactors.base.Interactor;
 

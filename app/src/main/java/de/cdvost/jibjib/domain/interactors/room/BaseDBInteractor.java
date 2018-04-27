@@ -1,10 +1,10 @@
-package de.cdvost.jibjib.domain.interactors.db;
+package de.cdvost.jibjib.domain.interactors.room;
 
 import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
 import de.cdvost.jibjib.domain.interactors.base.AbstractInteractor;
-import de.cdvost.jibjib.repository.db.IRoomDataBaseRepository;
-import de.cdvost.jibjib.repository.db.RoomDataBaseRepository;
+import de.cdvost.jibjib.repository.room.IRoomDataBaseRepository;
+import de.cdvost.jibjib.repository.room.RoomDataBaseRepository;
 
 public abstract class BaseDBInteractor extends AbstractInteractor {
 
