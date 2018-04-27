@@ -2,11 +2,12 @@ package de.cdvost.jibjib.presentation.presenter;
 
 import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
+import de.cdvost.jibjib.domain.interactors.base.Interactor;
 import de.cdvost.jibjib.domain.interactors.web.IMatchSoundInteractor;
-import de.cdvost.jibjib.domain.interactors.web.MatchSoundInteractorImpl;
+import de.cdvost.jibjib.domain.interactors.web.impl.MatchSoundInteractorImpl;
 import de.cdvost.jibjib.presentation.presenter.base.AbstractPresenter;
 
-public class MatchViewPresenter extends AbstractPresenter implements IMatchViewPresenter, IMatchSoundInteractor.Callback {
+public class MatchViewPresenter extends AbstractPresenter implements IMatchViewPresenter, Interactor.Callback {
 
     private IMatchViewPresenter.View view;
 
@@ -24,9 +25,14 @@ public class MatchViewPresenter extends AbstractPresenter implements IMatchViewP
     }
 
     @Override
-    public void onMatchFinished(Object matchResults) {
+    public void onExecutionFinished(Object matchResults) {
         view.hideProgress();
         view.showMatchResults(matchResults); ;
+    }
+
+    @Override
+    public void onExecutionFailed(Object fail) {
+        view.hideProgress();
     }
 
     @Override
