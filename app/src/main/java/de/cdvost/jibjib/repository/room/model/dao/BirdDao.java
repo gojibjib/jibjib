@@ -1,20 +1,25 @@
 package de.cdvost.jibjib.repository.room.model.dao;
 
+import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.Query;
+
 import java.util.List;
 
 import de.cdvost.jibjib.repository.room.model.entity.Bird;
 
 @Dao
-public class BirdDao {
+public interface BirdDao {
 
     @Query("SELECT * FROM bird")
-    List<Person> getAll();
+    List<Bird> getAll();
 
     @Query("SELECT * FROM bird WHERE id IN (:ids)")
-    List<Person> loadAllByIds(int[] ids);
+    List<Bird> loadAllByIds(int[] ids);
 
     @Query("SELECT * FROM bird WHERE name LIKE :name LIMIT 1")
-    Person findByName(String name);
+    Bird findByName(String name);
 
     @Insert
     void insertAll(Bird... bird);
