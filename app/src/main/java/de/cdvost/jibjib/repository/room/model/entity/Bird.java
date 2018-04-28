@@ -1,5 +1,9 @@
 package de.cdvost.jibjib.repository.room.model.entity;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 @Entity(tableName = "bird")
 public class Bird {
 

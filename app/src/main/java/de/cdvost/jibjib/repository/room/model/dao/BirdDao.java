@@ -34,4 +34,3 @@ public interface BirdDao {
     int count();
 }
 
-}
