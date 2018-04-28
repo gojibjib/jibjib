@@ -9,15 +9,15 @@ import de.cdvost.jibjib.repository.room.model.dao.BirdDao;
 import de.cdvost.jibjib.repository.room.model.entity.Bird;
 
 @Database(entities = {Bird.class}, version = 1)
-public abstract class RoomDataBase extends RoomDatabase {
+public abstract class RoomDB extends RoomDatabase {
 
-    private static RoomDataBase INSTANCE;
+    private static RoomDB INSTANCE;
 
     public abstract BirdDao birdDao();
 
-    public static RoomDataBase getInstance(Context context) {
+    public static RoomDB getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context, RoomDataBase.class, "jibjibDB")
+            INSTANCE = Room.databaseBuilder(context, RoomDB.class, "jibjibDB")
                     // recreate the database if necessary
                     .fallbackToDestructiveMigration()
                     .build();

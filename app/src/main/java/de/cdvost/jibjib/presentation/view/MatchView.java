@@ -33,7 +33,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button) {
-            System.out.println("bla");
             presenter.matchSound("audioInput");
         }
     }
