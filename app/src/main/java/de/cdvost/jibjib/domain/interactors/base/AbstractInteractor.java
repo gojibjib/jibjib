@@ -18,17 +18,15 @@ import de.cdvost.jibjib.domain.interactors.web.impl.MatchSoundInteractorImpl;
  */
 public abstract class AbstractInteractor implements Interactor {
 
-    protected final MatchSoundInteractorImpl.Callback callback;
     protected Executor threadExecutor;
     protected MainThread mainThread;
 
     protected volatile boolean isCanceled;
     protected volatile boolean isRunning;
 
-    public AbstractInteractor(Executor threadExecutor, MainThread mainThread, Interactor.Callback callback) {
+    public AbstractInteractor(Executor threadExecutor, MainThread mainThread) {
         this.threadExecutor = threadExecutor;
         this.mainThread = mainThread;
-        this.callback = callback;
     }
 
     /**
@@ -39,15 +37,6 @@ public abstract class AbstractInteractor implements Interactor {
      * public as to help with easier testing.
      */
     public abstract void run();
-
-    /**
-     * Default method to return any results from the execution of this
-     * interactor to the registered callback
-     * @param result
-     */
-    protected void executionFinished(Object result){
-        mainThread.post(()->callback.onExecutionFinished(result));
-    }
 
     public void cancel() {
         isCanceled = true;
