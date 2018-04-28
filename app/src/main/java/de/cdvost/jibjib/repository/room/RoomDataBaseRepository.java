@@ -15,4 +15,10 @@ public class RoomDataBaseRepository implements IRoomDataBaseRepository {
         List<Bird> birds = roomDB.birdDao().getAll();
         return birds;
     }
+
+    @Override
+    public void storeBird(Bird bird, Context context) {
+        RoomDB roomDB = RoomDB.getInstance(context);
+        roomDB.birdDao().insertAll(bird);
+    }
 }

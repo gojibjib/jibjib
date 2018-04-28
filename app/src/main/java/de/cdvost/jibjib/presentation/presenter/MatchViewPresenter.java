@@ -5,12 +5,15 @@ import java.util.List;
 import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
 import de.cdvost.jibjib.domain.interactors.base.Interactor;
+import de.cdvost.jibjib.domain.interactors.room.IStoreBirdInteractor;
 import de.cdvost.jibjib.domain.interactors.web.IMatchSoundInteractor;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 import de.cdvost.jibjib.domain.interactors.web.impl.MatchSoundInteractorImpl;
 import de.cdvost.jibjib.presentation.presenter.base.AbstractPresenter;
 
-public class MatchViewPresenter extends AbstractPresenter implements IMatchViewPresenter, IMatchSoundInteractor.Callback {
+public class MatchViewPresenter extends AbstractPresenter
+        implements IMatchViewPresenter, IMatchSoundInteractor.Callback,
+        IStoreBirdInteractor.Callback {
 
     private IMatchViewPresenter.View view;
 
@@ -31,6 +34,11 @@ public class MatchViewPresenter extends AbstractPresenter implements IMatchViewP
     public void onMatchingFinished(List<MatchResult> matchResults) {
         view.hideProgress();
         view.showMatchResults(matchResults); ;
+    }
+
+    @Override
+    public void onStoreComplete(boolean success) {
+
     }
 
     @Override
