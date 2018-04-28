@@ -3,8 +3,6 @@ package de.cdvost.jibjib.domain.interactors.base;
 
 import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
-import de.cdvost.jibjib.domain.interactors.web.IMatchSoundInteractor;
-import de.cdvost.jibjib.domain.interactors.web.impl.MatchSoundInteractorImpl;
 
 /**
  * Created by dmilicic on 8/4/15.

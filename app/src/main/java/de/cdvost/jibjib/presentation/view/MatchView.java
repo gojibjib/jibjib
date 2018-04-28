@@ -9,10 +9,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import de.cdvost.jibjib.R;
-import de.cdvost.jibjib.threading.ThreadExecutor;
 import de.cdvost.jibjib.presentation.presenter.IMatchViewPresenter;
 import de.cdvost.jibjib.presentation.presenter.MatchViewPresenter;
 import de.cdvost.jibjib.threading.MainThreadImpl;
+import de.cdvost.jibjib.threading.ThreadExecutor;
 
 public class MatchView extends Activity implements IMatchViewPresenter.View, View.OnClickListener  {
 

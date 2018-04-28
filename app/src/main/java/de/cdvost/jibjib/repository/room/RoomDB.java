@@ -13,8 +13,6 @@ public abstract class RoomDB extends RoomDatabase {
 
     private static RoomDB INSTANCE;
 
-    public abstract BirdDao birdDao();
-
     public static RoomDB getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context, RoomDB.class, "jibjibDB")
@@ -24,6 +22,8 @@ public abstract class RoomDB extends RoomDatabase {
         }
         return INSTANCE;
     }
+
+    public abstract BirdDao birdDao();
 
     public static void destroyInstance() {
         INSTANCE = null;

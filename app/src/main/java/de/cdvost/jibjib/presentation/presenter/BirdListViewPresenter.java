@@ -6,7 +6,6 @@ import java.util.List;
 
 import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
-import de.cdvost.jibjib.domain.interactors.base.AbstractInteractor;
 import de.cdvost.jibjib.domain.interactors.room.IBirdListInteractor;
 import de.cdvost.jibjib.domain.interactors.room.impl.BirdListInteractor;
 import de.cdvost.jibjib.presentation.presenter.base.AbstractPresenter;

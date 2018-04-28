@@ -4,7 +4,6 @@ import java.util.List;
 
 import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
-import de.cdvost.jibjib.domain.interactors.base.Interactor;
 import de.cdvost.jibjib.domain.interactors.room.IStoreBirdInteractor;
 import de.cdvost.jibjib.domain.interactors.web.IMatchSoundInteractor;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
@@ -37,7 +36,7 @@ public class MatchViewPresenter extends AbstractPresenter
     }
 
     @Override
-    public void onStoreComplete(boolean success) {
+    public void onStoreComplete() {
 
     }
 

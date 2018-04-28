@@ -8,5 +8,5 @@ import de.cdvost.jibjib.repository.room.model.entity.Bird;
 
 public interface IRoomDataBaseRepository {
     public List<Bird> getListOfBirds(Context context);
-    public boolean storeBird(Bird bird, Context context);
+    public void storeBird(Bird bird, Context context);
 }

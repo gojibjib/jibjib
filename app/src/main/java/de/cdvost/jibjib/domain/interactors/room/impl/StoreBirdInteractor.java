@@ -2,12 +2,9 @@ package de.cdvost.jibjib.domain.interactors.room.impl;
 
 import android.content.Context;
 
-import java.util.List;
-
 import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
 import de.cdvost.jibjib.domain.interactors.base.AbstractInteractor;
-import de.cdvost.jibjib.domain.interactors.room.IBirdListInteractor;
 import de.cdvost.jibjib.domain.interactors.room.IStoreBirdInteractor;
 import de.cdvost.jibjib.repository.room.IRoomDataBaseRepository;
 import de.cdvost.jibjib.repository.room.RoomDataBaseRepository;
@@ -32,8 +29,8 @@ public class StoreBirdInteractor extends AbstractInteractor implements IStoreBir
 
     @Override
     public void run(){
-        boolean success = repository.storeBird(bird, context);
-        mainThread.post(()->callback.onStoreComplete(success));
+        repository.storeBird(bird, context);
+        mainThread.post(()->callback.onStoreComplete());
     }
 
 }
