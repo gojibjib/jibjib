@@ -27,7 +27,7 @@ public class MatchResponseParser {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Collections.sort(results, (r1, r2)-> Double.compare(r1.getPercentage(), r2.getPercentage()));
+        Collections.sort(results, (r1, r2)-> Double.compare(r2.getPercentage(), r1.getPercentage()));
         return results;
     }
 }
