@@ -1,5 +1,6 @@
 package de.cdvost.jibjib.domain.interactors.web.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import de.cdvost.jibjib.domain.executor.Executor;
@@ -7,6 +8,7 @@ import de.cdvost.jibjib.domain.executor.MainThread;
 import de.cdvost.jibjib.domain.interactors.base.AbstractInteractor;
 import de.cdvost.jibjib.domain.interactors.web.IMatchSoundInteractor;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
+import de.cdvost.jibjib.domain.interactors.web.parser.MatchResponseParser;
 import de.cdvost.jibjib.repository.web.BirdWebServiceImpl;
 import de.cdvost.jibjib.repository.web.IBirdWebService;
 
@@ -37,7 +39,7 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
     @Override
     public void run() {
         String serviceResponse = matchBirdSound(audio);
-        List<MatchResult> results = MatchResultParser.parse(serviceResponse);
+        List<MatchResult> results = MatchResponseParser.parse(serviceResponse);
         executionFinished(results);
     }
 }

@@ -8,7 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import de.cdvost.jibjib.R;
+import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 import de.cdvost.jibjib.presentation.presenter.IMatchViewPresenter;
 import de.cdvost.jibjib.presentation.presenter.MatchViewPresenter;
 import de.cdvost.jibjib.threading.MainThreadImpl;
@@ -37,8 +40,14 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         }
     }
     @Override
-    public void showMatchResults(Object results) {
-        textView.setText(results.toString());
+    public void showMatchResults(List<MatchResult> results) {
+        StringBuilder builder = new StringBuilder();
+        results.forEach(result->
+                builder.append(result.getPercentage())
+                        .append(": ")
+                        .append(result.getName())
+                        .append("\n"));
+        textView.setText(builder.toString());
     }
 
     @Override

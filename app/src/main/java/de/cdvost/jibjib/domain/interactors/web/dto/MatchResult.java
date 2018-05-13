@@ -4,17 +4,17 @@ import java.net.URI;
 
 public class MatchResult {
 
-    private float percentage;
+    private double percentage;
     private URI uri;
     private String name;
 
-    public MatchResult(float percentage, URI uri, String name) {
+    public MatchResult(double percentage, URI uri, String name) {
         this.percentage = percentage;
         this.uri = uri;
         this.name = name;
     }
 
-    public float getPercentage() {
+    public double getPercentage() {
         return percentage;
     }
 
