@@ -13,6 +13,11 @@ public class BirdWebServiceImpl implements IBirdWebService {
         return response;
     }
 
+    @Override
+    public String getMatchBird(int id) {
+        return null;
+    }
+
     public String requestMatch(Object audio) {
 
         try {

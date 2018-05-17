@@ -10,4 +10,6 @@ public interface IBirdWebService {
      * @return the response of the web service as a string
      */
     public String match(Object audio);
+
+    public String getMatchBird(int id);
 }

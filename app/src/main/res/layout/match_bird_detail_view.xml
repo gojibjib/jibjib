@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/colorText">
+
+    <ImageView
+        android:id="@+id/BirdPic"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top"
+        android:src="@drawable/testbird"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/BirdName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/URI"
+        android:layout_below="@+id/BirdPic"
+        android:layout_gravity="top"
+        android:paddingTop="40dp"
+        android:text="Name"
+        android:textColor="@color/colorAccentText"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/URI"
+        android:text="URI"
+        android:maxLines="20"
+        android:textColor="@color/colorContentText"
+        android:textSize="15sp"
+        android:layout_marginLeft="40dp"
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BirdName"
+        android:layout_gravity="top" />
+
+    <TextView
+        android:id="@+id/BirdSpecies"
+        android:text="Gattung"
+        android:maxLines="20"
+        android:textColor="@color/colorContentText"
+        android:textSize="15sp"
+        android:layout_marginLeft="40dp"
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_below="@+id/URI" />
+
+    <TextView
+        android:id="@+id/BirdNutrition"
+        android:text="Ernährung"
+        android:maxLines="20"
+        android:textColor="@color/colorContentText"
+        android:textSize="15sp"
+        android:layout_marginLeft="40dp"
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_below="@+id/BirdSpecies" />
+
+    <Button
+        android:id="@+id/savebird"
+        android:layout_margin="50dp"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:textColor="#ffffff"
+        android:background="@drawable/buttonshape"
+        android:text="Save" />
+
+</RelativeLayout>

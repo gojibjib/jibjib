@@ -1,19 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/mainview"
+    android:background="#FFFF">
+
+    <ImageButton
+        android:id="@+id/birdlist"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/list"
+        android:backgroundTint="#FFFF"
+        android:tint="#FF4081"
+        android:paddingTop="30dp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:text="Birdcall audible?"
+        android:textSize="20dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:padding="30dp" />
+
+    <ListView
+        android:id="@+id/list_match"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:background="#ffffff"
+        android:layout_below="@+id/textView"
+        android:layout_above="@+id/button"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="160dp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_margin="50dp"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:textColor="#ffffff"
+        android:background="@drawable/buttonshape"
         android:text="Match" />
-</LinearLayout>
+
+</RelativeLayout>
+
