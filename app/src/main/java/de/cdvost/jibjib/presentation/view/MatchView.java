@@ -72,7 +72,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
 
         List<String> matchResult = new ArrayList<String>();
         for (MatchResult result : results) {
-            matchResult.add(result.getName() + " " + result.getPercentage());
+            matchResult.add(result.getName() /*+ " " + result.getPercentage()*/);
         }
 
         ListAdapter birdListAdapter = new ArrayAdapter(
@@ -91,8 +91,10 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         Toast.makeText(this, "on item click" + matchBirds.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MatchBirdDetailView.class);
         //TODO get ID
-        int id = 0;
-        intent.putExtra(MatchBirdDetailView.BIRD_ID, id);
+        //int id = matchBirds.getItemAtPosition(position);
+        //intent.putExtra(MatchBirdDetailView.BIRD_ID, id);
+        String id = matchBirds.getItemAtPosition(position).toString();
+        intent.putExtra(Intent.EXTRA_TEXT, id);
         startActivity(intent);
     }
 

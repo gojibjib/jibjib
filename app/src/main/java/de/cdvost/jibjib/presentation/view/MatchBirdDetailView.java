@@ -1,6 +1,7 @@
 package de.cdvost.jibjib.presentation.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Button;
@@ -40,7 +41,8 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
     @BindView(R.id.savebird)
     Button saveBird;
 
-    private int birdID;
+    private String birdID;
+    private int birdId;
 
     private IMatchBirdDetailPresenter presenter;
 
@@ -50,13 +52,17 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
         setContentView(R.layout.match_bird_detail_view);
         this.presenter = new MatchBirdDetailPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
-        birdID = getIntent().getIntExtra(BIRD_ID, -1);
-        presenter.getMatchBird(birdID);
+        birdID = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+        birdId = Integer.parseInt(birdID);
+        presenter.getMatchBird(birdId);
+        Intent BirdIntent = getIntent();
+
+        name.setText(birdID);
     }
 
     @OnClick(R.id.savebird)
     public void onClick() {
-        presenter.saveBird(new Bird(birdID, name.getText().toString(), uri.getText().toString()), this);
+        presenter.saveBird(new Bird(birdId, name.getText().toString(), uri.getText().toString()), this);
     }
 
     @Override
