@@ -1,5 +1,7 @@
 package de.cdvost.jibjib.presentation.presenter;
 
+import android.os.Handler;
+
 import java.util.List;
 
 import de.cdvost.jibjib.domain.executor.Executor;
@@ -32,7 +34,7 @@ public class MatchViewPresenter extends AbstractPresenter
     @Override
     public void onMatchingFinished(List<MatchResult> matchResults) {
         view.hideProgress();
-        view.showMatchResults(matchResults); ;
+        view.showMatchResults(matchResults);
     }
 
     @Override

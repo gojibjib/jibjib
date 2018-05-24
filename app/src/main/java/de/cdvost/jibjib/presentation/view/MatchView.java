@@ -2,12 +2,14 @@ package de.cdvost.jibjib.presentation.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -40,8 +42,11 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
     ProgressBar matchProgress;
     @BindView(R.id.birdlist)
     ImageButton birdlist;
+    @BindView(R.id.bird_background)
+    ImageView birdbackground;
 
     private IMatchViewPresenter presenter;
+    private AnimationDrawable birdanimation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +55,9 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         this.presenter = new MatchViewPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
         btnMatch.setOnClickListener(this);
+
+        birdbackground.setImageResource(R.drawable.jibjib);
+        birdanimation = (AnimationDrawable) birdbackground.getDrawable();
     }
 
     @Override
@@ -106,7 +114,10 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
 
     @Override
     public void showProgress() {
-        matchProgress.setVisibility(View.VISIBLE);
+        //matchProgress.setVisibility(View.VISIBLE);
+
+        birdanimation.start();
+
         textView.setText("recording");
         matchProgress.animate();
         Toast.makeText(this, "Matching sound", Toast.LENGTH_SHORT).show();
@@ -114,8 +125,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
 
     @Override
     public void hideProgress() {
-        matchBirds.setVisibility(View.VISIBLE);
-        matchProgress.setVisibility(View.GONE);
+        //matchBirds.setVisibility(View.VISIBLE);
+        //matchProgress.setVisibility(View.GONE);
         //Toast.makeText(this, "Matching done", Toast.LENGTH_SHORT).show();
     }
 
