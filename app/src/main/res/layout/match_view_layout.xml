@@ -10,9 +10,10 @@
         android:id="@+id/bird_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/test_mainscreen"
+        android:layout_alignParentStart="true"
 
-        />
+        android:layout_alignParentTop="true"
+        android:src="@drawable/test_mainscreen" />
 
     <ImageButton
         android:id="@+id/birdlist"
@@ -52,17 +53,93 @@
         android:padding="160dp"
         android:visibility="gone" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_margin="50dp"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
+
+    <RelativeLayout
+        android:id="@+id/recorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:textColor="#ffffff"
-        android:background="@drawable/buttonshape"
-        android:backgroundTint="#FFFD7455"
-        android:text="Match" />
+        android:layout_margin="20dp">
+
+        <ProgressBar
+            android:id="@+id/determinateBar"
+            style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:max="80" />
+
+        <Button
+            android:id="@+id/rec_button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="rec"
+            android:textColor="#ffffff"
+            android:background="@drawable/buttonshape"
+            android:backgroundTint="#FFFD7455"
+            android:layout_below="@+id/determinateBar"
+            android:layout_margin="10dp" />
+
+        <Button
+            android:id="@+id/rec_stop_button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="stop rec"
+            android:layout_below="@+id/determinateBar"
+            android:textColor="#ffffff"
+            android:background="@drawable/buttonshape"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="#FFFD7455"
+
+            android:layout_margin="10dp" />
+
+        <Button
+            android:id="@+id/play_button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="play rec"
+            android:layout_below="@+id/rec_button"
+            android:textColor="#ffffff"
+            android:background="@drawable/buttonshape"
+            android:backgroundTint="#FFFD7455"
+            android:layout_marginStart="10dp" />
+
+        <Button
+            android:id="@+id/stop_button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="stop"
+            android:layout_below="@+id/rec_stop_button"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:background="@drawable/buttonshape"
+            android:backgroundTint="#FFFD7455" />
+
+        <Button
+            android:id="@+id/new_rec_button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="new"
+            android:textColor="#ffffff"
+            android:background="@drawable/buttonshape"
+            android:backgroundTint="#FFFD7455"
+            android:layout_below="@+id/rec_stop_button"
+            android:layout_toRightOf="@+id/stop_button"
+            android:layout_marginStart="20dp" />
+
+        <Button
+            android:layout_below="@+id/stop_button"
+            android:id="@+id/button"
+            android:layout_margin="10dp"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:textColor="#FFFD7455"
+            android:background="@drawable/buttonshape_outline"
+
+            android:text="Match" />
+    </RelativeLayout>
+
 
 </RelativeLayout>
 

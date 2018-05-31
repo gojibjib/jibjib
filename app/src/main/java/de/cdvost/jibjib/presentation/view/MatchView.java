@@ -1,10 +1,15 @@
 package de.cdvost.jibjib.presentation.view;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,9 +50,15 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
     ImageButton birdlist;
     @BindView(R.id.bird_background)
     ImageView birdbackground;
+    @BindView(R.id.determinateBar)
+    public ProgressBar mProgress;
 
+
+    private static final int REQUEST_CODE_PERMISSION_RECORD_AUDIO = 1;
     private IMatchViewPresenter presenter;
     private AnimationDrawable birdanimation;
+    private String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
+    private final Handler progressHandler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +106,33 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         textView.setText("MATCHES");
     }
 
+    @Override
+    public File getFileStreamPath() {
+        return this.getFileStreamPath("recording_" + RandomAudioFileName + ".3gp");
+    }
+
+    @Override
+    public void updateProgressBar() {
+        birdanimation.start();
+        textView.setText("recording");
+        mProgress.setProgress(0);
+        final Runnable progress = () -> {
+            //while(mProgress.get()<20 && isRecording){
+            mProgress.setProgress(mProgress.getProgress() + 1);
+            //}
+        };
+        for (int i = 0; i < 80; i++) {
+            progressHandler.postDelayed(progress, 250 * i);
+        }
+    }
+
+    @Override
+    public void stopProgressBar() {
+        progressHandler.removeCallbacksAndMessages(null);
+        birdanimation.stop();
+        textView.setText("Done");
+    }
+
     @OnItemClick(R.id.list_match)
     public void onItemClick(int position) {
         Toast.makeText(this, "on item click" + matchBirds.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
@@ -116,10 +155,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
     public void showProgress() {
         //matchProgress.setVisibility(View.VISIBLE);
 
-        birdanimation.start();
-
-        textView.setText("recording");
-        matchProgress.animate();
         Toast.makeText(this, "Matching sound", Toast.LENGTH_SHORT).show();
     }
 
@@ -134,4 +169,40 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
     public void showError(String message) {
 
     }
+
+    @OnClick(R.id.rec_button)
+    public void startRecord() {
+        Toast.makeText(this, "Start Record", Toast.LENGTH_SHORT).show();
+        if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)) {
+            presenter.startRecording();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_CODE_PERMISSION_RECORD_AUDIO);
+        }
+    }
+
+    @OnClick(R.id.rec_stop_button)
+    public void stopRecord() {
+        Toast.makeText(this, "Stop Record", Toast.LENGTH_SHORT).show();
+        presenter.stopRecording();
+    }
+
+    @OnClick(R.id.play_button)
+    public void playRecord() {
+        Toast.makeText(this, "Play Record", Toast.LENGTH_SHORT).show();
+        presenter.startStopRecordingPlayback();
+    }
+
+    @OnClick(R.id.stop_button)
+    public void stopRecordPlay() {
+        Toast.makeText(this, "Stop Record Play", Toast.LENGTH_SHORT).show();
+        presenter.stopRecordingPlayback();
+    }
+
+    @OnClick(R.id.new_rec_button)
+    public void newRecord() {
+        Toast.makeText(this, "New Record", Toast.LENGTH_SHORT).show();
+        textView.setText("Birdcall audible?");
+        mProgress.setProgress(0);
+    }
+
 }

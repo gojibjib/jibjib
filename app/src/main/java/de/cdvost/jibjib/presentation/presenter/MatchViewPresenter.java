@@ -1,7 +1,12 @@
 package de.cdvost.jibjib.presentation.presenter;
 
-import android.os.Handler;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
+import android.util.Log;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
 import de.cdvost.jibjib.domain.executor.Executor;
@@ -17,6 +22,12 @@ public class MatchViewPresenter extends AbstractPresenter
         IStoreBirdInteractor.Callback {
 
     private IMatchViewPresenter.View view;
+    private MediaPlayer recordingMediaPlayer = null;
+
+    private MediaRecorder mediaRecorder = null;
+    private static final int MAX_RECORDING_TIME = 20000;
+
+    private boolean isRecording = false;
 
     public MatchViewPresenter(Executor executor, MainThread mainThread, View view) {
         super(executor, mainThread);
@@ -69,6 +80,107 @@ public class MatchViewPresenter extends AbstractPresenter
 
     @Override
     public void onError(String message) {
+
+    }
+
+    public void stopRecordingPlayback() {
+        if (recordingMediaPlayer == null)
+            return;
+
+        try {
+            recordingMediaPlayer.stop();
+        } catch (IllegalStateException ie) {
+            Log.e("StoryActivity", "could not stop recording playback");
+        }
+        recordingMediaPlayer.release();
+    }
+
+    public void startStopRecordingPlayback() {
+        stopRecordingPlayback();
+
+        File file = getRecordingFile();
+        if (!file.exists()) {
+            return;
+        }
+
+        recordingMediaPlayer = new MediaPlayer();
+        recordingMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+            }
+        });
+
+        try {
+            // its important that we open the file stream ourselves and just
+            // hand over the file descriptor to the media player, otherwise
+            // the player wouldn't be able to read the file itself as we
+            // haven't created it with global permissions
+            FileInputStream inputstream = new FileInputStream(file);
+            recordingMediaPlayer.setDataSource(inputstream.getFD());
+            recordingMediaPlayer.prepare();
+        } catch (IOException io) {
+            Log.e("StoryActivity", "Cannot load / prepare audio playback from " + file.getAbsolutePath());
+        }
+
+        recordingMediaPlayer.start();
+    }
+
+    public void startRecording() {
+
+        mediaRecorder = new MediaRecorder();
+        mediaRecorder.reset();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        mediaRecorder.setMaxDuration(MAX_RECORDING_TIME);
+
+        mediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
+
+            public void onInfo(MediaRecorder mr, int what, int extra) {
+                if (what != MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED)
+                    return;
+
+                stopRecording();
+            }
+        });
+
+        mediaRecorder.setOnErrorListener(new MediaRecorder.OnErrorListener() {
+
+            public void onError(MediaRecorder mr, int what, int extra) {
+                Log.e("StoryActivity", "An error occurred while recording audio, code " + what + ", extra: " + extra);
+
+            }
+        });
+
+        try {
+            File file = getRecordingFile();
+            if (file.exists())
+                file.delete();
+
+            mediaRecorder.setOutputFile(file.getAbsolutePath());
+            mediaRecorder.prepare();
+        } catch (IOException io) {
+            Log.e("StoryActivity", "Could not prepare audio recording: " + io.getMessage());
+            return;
+        }
+
+        mediaRecorder.start();
+        isRecording = true;
+
+        view.updateProgressBar();
+    }
+
+    public File getRecordingFile() {
+        return view.getFileStreamPath();
+    }
+
+    public void stopRecording() {
+        if (mediaRecorder == null)
+            return;
+        view.stopProgressBar();
+        mediaRecorder.stop();
+        mediaRecorder.reset();
+        mediaRecorder.release();
+        mediaRecorder = null;
 
     }
 }
