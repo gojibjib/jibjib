@@ -8,7 +8,6 @@ import de.cdvost.jibjib.domain.executor.MainThread;
 import de.cdvost.jibjib.domain.interactors.room.IStoreBirdInteractor;
 import de.cdvost.jibjib.domain.interactors.room.impl.StoreBirdInteractor;
 import de.cdvost.jibjib.domain.interactors.web.IGetBirdDetailsInteractor;
-import de.cdvost.jibjib.domain.interactors.web.dto.BirdResult;
 import de.cdvost.jibjib.presentation.presenter.base.AbstractPresenter;
 import de.cdvost.jibjib.repository.room.model.entity.Bird;
 
@@ -58,7 +57,7 @@ public class MatchBirdDetailPresenter extends AbstractPresenter implements IMatc
     }
 
     @Override
-    public void onBirdReceived(BirdResult result) {
+    public void onBirdReceived(Bird bird) {
 
     }
 
