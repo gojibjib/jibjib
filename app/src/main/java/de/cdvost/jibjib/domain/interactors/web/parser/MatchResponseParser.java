@@ -20,9 +20,9 @@ public class MatchResponseParser {
             JSONArray responseArray = jsonResponse.getJSONArray("data");
             for(int i=0;i<responseArray.length();i++){
                 JSONObject jsonObject = responseArray.getJSONObject(i);
-                String id = jsonObject.getString("id");
+                int id = jsonObject.getInt("id");
                 double accuracy = jsonObject.getDouble("accuracy");
-                results.add(new MatchResult(accuracy, null, id));
+                results.add(new MatchResult(accuracy, null, id, null));
             }
         } catch (JSONException e) {
             e.printStackTrace();
