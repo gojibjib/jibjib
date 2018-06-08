@@ -38,6 +38,7 @@ public class MatchViewPresenter extends AbstractPresenter
     public void matchSound(Object audio) {
         //starts the long-running method
         //results will be returned in the callback method (onMatchingFinished())
+        Log.e("MVP", "filestreampath: " + audio.toString());
         view.showProgress();
         new MatchSoundInteractorImpl(executor, mainThread, audio, this).execute();
     }
