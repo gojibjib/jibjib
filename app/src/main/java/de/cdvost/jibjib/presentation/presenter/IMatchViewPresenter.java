@@ -18,7 +18,7 @@ public interface IMatchViewPresenter extends IPresenter {
         public void stopProgressBar();
     }
 
-    public void matchSound(Object audio);
+    public void matchSound();
 
     public void stopRecordingPlayback();
 

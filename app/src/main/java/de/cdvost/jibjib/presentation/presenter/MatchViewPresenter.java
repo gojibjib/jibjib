@@ -35,11 +35,11 @@ public class MatchViewPresenter extends AbstractPresenter
     }
 
     @Override
-    public void matchSound(Object audio) {
+    public void matchSound() {
         //starts the long-running method
         //results will be returned in the callback method (onMatchingFinished())
         view.showProgress();
-        new MatchSoundInteractorImpl(executor, mainThread, audio, this).execute();
+        new MatchSoundInteractorImpl(executor, mainThread, getRecordingFile(), this).execute();
     }
 
     @Override
