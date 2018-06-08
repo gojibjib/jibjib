@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -52,11 +53,16 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
     ImageView birdbackground;
     @BindView(R.id.determinateBar)
     public ProgressBar mProgress;
+    @BindView(R.id.splash_screen)
+    public ViewGroup splashScreen;
+    @BindView(R.id.splash_screen_image)
+    public ImageView splashScreenImage;
 
 
     private static final int REQUEST_CODE_PERMISSION_RECORD_AUDIO = 1;
     private IMatchViewPresenter presenter;
     private AnimationDrawable birdanimation;
+    private AnimationDrawable splashAnimation;
     private String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     private final Handler progressHandler = new Handler();
 
@@ -70,8 +76,27 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
 
         birdbackground.setImageResource(R.drawable.jibjib);
         birdanimation = (AnimationDrawable) birdbackground.getDrawable();
+
+        splashScreenImage.setImageResource(R.drawable.splash_animation);
+        splashAnimation = (AnimationDrawable) splashScreenImage.getDrawable();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        splashAnimation.start();
+
+        final Runnable progress = () -> {
+            splashScreen.setVisibility(View.GONE);
+            splashAnimation.stop();
+        };
+
+        Handler splashHandler = new Handler();
+        splashHandler.postDelayed(progress, 7000);
+
+
+    }
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button) {

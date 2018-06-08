@@ -6,6 +6,7 @@
     android:id="@+id/mainview"
     android:background="#FFFF">
 
+
     <ImageView
         android:id="@+id/bird_background"
         android:layout_width="match_parent"
@@ -139,6 +140,20 @@
 
             android:text="Match" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/splash_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffff">
+
+        <ImageView
+            android:id="@+id/splash_screen_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/splash_start"
+            android:layout_margin="70dp" />
+    </LinearLayout>
 
 
 </RelativeLayout>
