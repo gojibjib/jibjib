@@ -52,11 +52,6 @@ public class Bird {
         this.description_en = description_en;
     }
 
-    public Bird(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public int getId() {
         return id;
     }

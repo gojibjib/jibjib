@@ -62,7 +62,7 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
 
     @OnClick(R.id.savebird)
     public void onClick() {
-        presenter.saveBird(new Bird(birdId, name.getText().toString()), this);
+        presenter.saveBird(new Bird(birdId, name.getText().toString(), null,null,null,null,null,null), this);
     }
 
     @Override
