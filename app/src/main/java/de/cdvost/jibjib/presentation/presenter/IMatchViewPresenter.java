@@ -1,15 +1,18 @@
 package de.cdvost.jibjib.presentation.presenter;
 
+import android.content.Context;
+
 import java.io.File;
 import java.util.List;
 
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 import de.cdvost.jibjib.presentation.presenter.base.IPresenter;
 import de.cdvost.jibjib.presentation.view.base.BaseView;
+import de.cdvost.jibjib.repository.room.model.entity.Bird;
 
 public interface IMatchViewPresenter extends IPresenter {
     interface View extends BaseView {
-        public void showMatchResults(List<MatchResult> results);
+        public void showMatchResults(List<Bird> results);
 
         public File getFileStreamPath();
 
@@ -18,7 +21,7 @@ public interface IMatchViewPresenter extends IPresenter {
         public void stopProgressBar();
     }
 
-    public void matchSound(Object audio);
+    public void matchSound(Context context);
 
     public void stopRecordingPlayback();
 

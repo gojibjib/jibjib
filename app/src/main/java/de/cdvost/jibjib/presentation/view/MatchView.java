@@ -34,6 +34,7 @@ import de.cdvost.jibjib.R;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 import de.cdvost.jibjib.presentation.presenter.IMatchViewPresenter;
 import de.cdvost.jibjib.presentation.presenter.MatchViewPresenter;
+import de.cdvost.jibjib.repository.room.model.entity.Bird;
 import de.cdvost.jibjib.threading.MainThreadImpl;
 import de.cdvost.jibjib.threading.ThreadExecutor;
 
@@ -101,10 +102,11 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
     public void onClick(View view) {
         if (view.getId() == R.id.button) {
             presenter.matchSound(getFileStreamPath());
+            presenter.matchSound(this);
         }
     }
     @Override
-    public void showMatchResults(List<MatchResult> results) {
+    public void showMatchResults(List<Bird> results) {
 
 
         /*StringBuilder builder = new StringBuilder();
@@ -116,7 +118,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         textView.setText(builder.toString());*/
 
         List<String> matchResult = new ArrayList<String>();
-        for (MatchResult result : results) {
+        for (Bird result : results) {
             matchResult.add(result.getName() /*+ " " + result.getPercentage()*/);
         }
 

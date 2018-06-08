@@ -6,11 +6,13 @@ public class MatchResult {
 
     private double percentage;
     private URI uri;
+    private int id;
     private String name;
 
-    public MatchResult(double percentage, URI uri, String name) {
+    public MatchResult(double percentage, URI uri, int id, String name) {
         this.percentage = percentage;
         this.uri = uri;
+        this.id = id;
         this.name = name;
     }
 
@@ -24,5 +26,9 @@ public class MatchResult {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
     }
 }

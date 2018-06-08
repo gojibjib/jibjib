@@ -13,19 +13,15 @@ import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 
 public class MatchResponseParser {
 
-    public static List<MatchResult> parse(String response){
+    public static List<MatchResult> parse(String response) throws JSONException{
         List<MatchResult> results = new ArrayList<>();
-        try {
-            JSONObject jsonResponse = new JSONObject(response);
-            JSONArray responseArray = jsonResponse.getJSONArray("data");
-            for(int i=0;i<responseArray.length();i++){
-                JSONObject jsonObject = responseArray.getJSONObject(i);
-                String id = jsonObject.getString("id");
-                double accuracy = jsonObject.getDouble("accuracy");
-                results.add(new MatchResult(accuracy, null, id));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        JSONObject jsonResponse = new JSONObject(response);
+        JSONArray responseArray = jsonResponse.getJSONArray("data");
+        for(int i=0;i<responseArray.length();i++){
+            JSONObject jsonObject = responseArray.getJSONObject(i);
+            int id = jsonObject.getInt("id");
+            double accuracy = jsonObject.getDouble("accuracy");
+            results.add(new MatchResult(accuracy, null, id, null));
         }
         Collections.sort(results, (r1, r2)-> Double.compare(r2.getPercentage(), r1.getPercentage()));
         return results;

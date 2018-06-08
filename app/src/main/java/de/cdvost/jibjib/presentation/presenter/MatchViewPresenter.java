@@ -1,5 +1,6 @@
 package de.cdvost.jibjib.presentation.presenter;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.util.Log;
@@ -12,13 +13,17 @@ import java.util.List;
 import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
 import de.cdvost.jibjib.domain.interactors.room.IStoreBirdInteractor;
+import de.cdvost.jibjib.domain.interactors.web.IGetBirdDetailsInteractor;
 import de.cdvost.jibjib.domain.interactors.web.IMatchSoundInteractor;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
+import de.cdvost.jibjib.domain.interactors.web.impl.GetBirdDetailsInteractorImpl;
 import de.cdvost.jibjib.domain.interactors.web.impl.MatchSoundInteractorImpl;
 import de.cdvost.jibjib.presentation.presenter.base.AbstractPresenter;
+import de.cdvost.jibjib.repository.room.model.entity.Bird;
 
 public class MatchViewPresenter extends AbstractPresenter
-        implements IMatchViewPresenter, IMatchSoundInteractor.Callback,
+        implements IMatchViewPresenter,
+        IMatchSoundInteractor.Callback,
         IStoreBirdInteractor.Callback {
 
     private IMatchViewPresenter.View view;
@@ -35,18 +40,18 @@ public class MatchViewPresenter extends AbstractPresenter
     }
 
     @Override
-    public void matchSound(Object audio) {
+    public void matchSound(Context context) {
         //starts the long-running method
         //results will be returned in the callback method (onMatchingFinished())
         Log.e("MVP", "filestreampath: " + audio.toString());
         view.showProgress();
-        new MatchSoundInteractorImpl(executor, mainThread, audio, this).execute();
+        new MatchSoundInteractorImpl(executor, mainThread, getRecordingFile(), context, this).execute();
     }
 
     @Override
-    public void onMatchingFinished(List<MatchResult> matchResults) {
+    public void onMatchingFinished(List<Bird> results) {
         view.hideProgress();
-        view.showMatchResults(matchResults);
+        view.showMatchResults(results);
     }
 
     @Override

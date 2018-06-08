@@ -4,7 +4,8 @@ import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
 import de.cdvost.jibjib.domain.interactors.base.AbstractInteractor;
 import de.cdvost.jibjib.domain.interactors.web.IGetBirdDetailsInteractor;
-import de.cdvost.jibjib.domain.interactors.web.dto.BirdResult;
+import de.cdvost.jibjib.domain.interactors.web.parser.BirdDetailsParser;
+import de.cdvost.jibjib.repository.room.model.entity.Bird;
 import de.cdvost.jibjib.repository.web.BirdWebServiceImpl;
 import de.cdvost.jibjib.repository.web.IBirdWebService;
 
@@ -24,12 +25,14 @@ public class GetBirdDetailsInteractorImpl extends AbstractInteractor {
         birdWebService = new BirdWebServiceImpl();
     }
 
-    private void executionFinished(BirdResult result) {
-        mainThread.post(() -> callback.onBirdReceived(result));
+    private void executionFinished(Bird bird) {
+        mainThread.post(() -> callback.onBirdReceived(bird));
     }
 
     @Override
     public void run() {
-
+        String response = birdWebService.getMatchBird(id);
+        Bird bird = BirdDetailsParser.parse(response);
+        executionFinished(bird);
     }
 }
