@@ -45,15 +45,23 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
         mainThread.post(()->callback.onMatchingFinished(results));
     }
 
+    private void executionFailed(Object fail){
+        mainThread.post(()->callback.onExecutionFailed(fail));
+    }
+
     @Override
     public void run() {
         List<Bird> birds = new ArrayList<>();
         String serviceResponse = matchBirdSound(audio);
-        List<MatchResult> matchResults = null;
+        if(serviceResponse==null){
+            executionFailed("No response from server");
+            return;
+        }
+        List<MatchResult> matchResults = new ArrayList<>();
         try {
             matchResults = MatchResponseParser.parse(serviceResponse);
         } catch (JSONException e) {
-            callback.onExecutionFailed(e);
+            executionFailed(e);
             return;
         }
         //check if birds are already stored in the DB
@@ -71,6 +79,5 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
                 }
             }
         }
-        executionFinished(birds);
     }
 }

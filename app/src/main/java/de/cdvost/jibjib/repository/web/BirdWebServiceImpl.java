@@ -95,7 +95,7 @@ public class BirdWebServiceImpl implements IBirdWebService {
             conn.setDoOutput(true);
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
 
-            File audioFile = new File("file:////home/pplitzner/test.mp3");
+            File audioFile = new File(audio.toString());
             byte[] fileData = new byte[(int) audioFile.length()];
             DataInputStream dis = new DataInputStream(new FileInputStream(audioFile));
             dis.readFully(fileData);
