@@ -101,7 +101,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button) {
-            presenter.matchSound(getFileStreamPath());
             presenter.matchSound(this);
         }
     }

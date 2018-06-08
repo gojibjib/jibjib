@@ -43,7 +43,6 @@ public class MatchViewPresenter extends AbstractPresenter
     public void matchSound(Context context) {
         //starts the long-running method
         //results will be returned in the callback method (onMatchingFinished())
-        Log.e("MVP", "filestreampath: " + audio.toString());
         view.showProgress();
         new MatchSoundInteractorImpl(executor, mainThread, getRecordingFile(), context, this).execute();
     }
@@ -96,7 +95,7 @@ public class MatchViewPresenter extends AbstractPresenter
         try {
             recordingMediaPlayer.stop();
         } catch (IllegalStateException ie) {
-            Log.e("StoryActivity", "could not stop recording playback");
+            Log.e("MatchViewPresenter", "could not stop recording playback");
         }
         recordingMediaPlayer.release();
     }
@@ -124,7 +123,7 @@ public class MatchViewPresenter extends AbstractPresenter
             recordingMediaPlayer.setDataSource(inputstream.getFD());
             recordingMediaPlayer.prepare();
         } catch (IOException io) {
-            Log.e("StoryActivity", "Cannot load / prepare audio playback from " + file.getAbsolutePath());
+            Log.e("MatchViewPresenter", "Cannot load / prepare audio playback from " + file.getAbsolutePath());
         }
 
         recordingMediaPlayer.start();
