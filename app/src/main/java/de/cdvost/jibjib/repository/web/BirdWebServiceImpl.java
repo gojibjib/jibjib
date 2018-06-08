@@ -51,7 +51,7 @@ public class BirdWebServiceImpl implements IBirdWebService {
     public String requestMatch(Object audio) {
 
         try {
-            String uriString = "http://jibjib.api.f0rkd.net:8080/dummy";
+            String uriString = "http://jibjib.api.f0rkd.net:8080/birds/dummy";
 
             URL url = new URL(uriString);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
