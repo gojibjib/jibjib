@@ -79,5 +79,6 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
                 }
             }
         }
+        executionFinished(birds);
     }
 }
