@@ -21,9 +21,9 @@ public class MatchResponseParser {
             JSONObject jsonObject = responseArray.getJSONObject(i);
             int id = jsonObject.getInt("id");
             double accuracy = jsonObject.getDouble("accuracy");
-            results.add(new MatchResult(accuracy, null, id, null));
+            results.add(new MatchResult(accuracy, id));
         }
-        Collections.sort(results, (r1, r2)-> Double.compare(r2.getPercentage(), r1.getPercentage()));
+        Collections.sort(results, (r1, r2)-> Double.compare(r2.getAccuracy(), r1.getAccuracy()));
         return results;
     }
 }

@@ -2,33 +2,24 @@ package de.cdvost.jibjib.domain.interactors.web.dto;
 
 import java.net.URI;
 
+import de.cdvost.jibjib.repository.room.model.entity.Bird;
+
 public class MatchResult {
 
-    private double percentage;
-    private URI uri;
+    private double accuracy;
     private int id;
-    private String name;
 
-    public MatchResult(double percentage, URI uri, int id, String name) {
-        this.percentage = percentage;
-        this.uri = uri;
+    public MatchResult(double accuracy, int id) {
+        this.accuracy = accuracy;
         this.id = id;
-        this.name = name;
     }
 
-    public double getPercentage() {
-        return percentage;
-    }
-
-    public URI getUri() {
-        return uri;
-    }
-
-    public String getName() {
-        return name;
+    public double getAccuracy() {
+        return accuracy;
     }
 
     public int getId() {
         return id;
     }
+
 }
