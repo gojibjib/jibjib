@@ -16,6 +16,7 @@ import de.cdvost.jibjib.domain.interactors.room.IStoreBirdInteractor;
 import de.cdvost.jibjib.domain.interactors.web.IGetBirdDetailsInteractor;
 import de.cdvost.jibjib.domain.interactors.web.IMatchSoundInteractor;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
+import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
 import de.cdvost.jibjib.domain.interactors.web.impl.GetBirdDetailsInteractorImpl;
 import de.cdvost.jibjib.domain.interactors.web.impl.MatchSoundInteractorImpl;
 import de.cdvost.jibjib.presentation.presenter.base.AbstractPresenter;
@@ -48,7 +49,7 @@ public class MatchViewPresenter extends AbstractPresenter
     }
 
     @Override
-    public void onMatchingFinished(List<Bird> results) {
+    public void onMatchingFinished(List<MatchedBird> results) {
         view.hideProgress();
         view.showMatchResults(results);
     }

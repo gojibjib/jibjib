@@ -32,6 +32,7 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import de.cdvost.jibjib.R;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
+import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
 import de.cdvost.jibjib.presentation.presenter.IMatchViewPresenter;
 import de.cdvost.jibjib.presentation.presenter.MatchViewPresenter;
 import de.cdvost.jibjib.repository.room.model.entity.Bird;
@@ -105,7 +106,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         }
     }
     @Override
-    public void showMatchResults(List<Bird> results) {
+    public void showMatchResults(List<MatchedBird> results) {
 
 
         /*StringBuilder builder = new StringBuilder();
@@ -117,8 +118,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         textView.setText(builder.toString());*/
 
         List<String> matchResult = new ArrayList<String>();
-        for (Bird result : results) {
-            matchResult.add(result.getName() /*+ " " + result.getPercentage()*/);
+        for (MatchedBird result : results) {
+            matchResult.add(result.getBird().getName()+" "+result.getAccuracy());
         }
 
         ListAdapter birdListAdapter = new ArrayAdapter(

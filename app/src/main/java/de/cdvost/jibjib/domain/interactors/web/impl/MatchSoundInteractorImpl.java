@@ -13,6 +13,7 @@ import de.cdvost.jibjib.domain.executor.MainThread;
 import de.cdvost.jibjib.domain.interactors.base.AbstractInteractor;
 import de.cdvost.jibjib.domain.interactors.web.IMatchSoundInteractor;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
+import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
 import de.cdvost.jibjib.domain.interactors.web.parser.BirdDetailsParser;
 import de.cdvost.jibjib.domain.interactors.web.parser.MatchResponseParser;
 import de.cdvost.jibjib.repository.room.RoomDataBaseRepository;
@@ -41,7 +42,7 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
     }
 
 
-    private void executionFinished(List<Bird> results){
+    private void executionFinished(List<MatchedBird> results){
         mainThread.post(()->callback.onMatchingFinished(results));
     }
 
@@ -51,7 +52,7 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
 
     @Override
     public void run() {
-        List<Bird> birds = new ArrayList<>();
+        List<MatchedBird> birds = new ArrayList<>();
         String serviceResponse = matchBirdSound(audio);
         if(serviceResponse==null){
             executionFailed("No response from server");
@@ -69,13 +70,13 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
         for (MatchResult result : matchResults) {
             Bird bird = roomDataBaseRepository.loadBirdById(result.getId(), context);
             if(bird!=null){
-                birds.add(bird);
+                birds.add(new MatchedBird(bird, result.getAccuracy()));
             }
             else{
                 String response = new BirdWebServiceImpl().getMatchBird(result.getId());
                 bird = BirdDetailsParser.parse(response);
                 if(bird!=null){
-                    birds.add(bird);
+                    birds.add(new MatchedBird(bird, result.getAccuracy()));
                 }
             }
         }
