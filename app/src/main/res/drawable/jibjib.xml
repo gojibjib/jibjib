@@ -3,9 +3,21 @@
     android:oneshot="false"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/test_mainscreen"
-        android:duration="100" />
+        android:drawable="@drawable/birds_online"
+        android:duration="500" />
     <item
-        android:drawable="@drawable/test_mainscreen_open"
+        android:drawable="@drawable/birds_online_mid"
+        android:duration="100" />
+
+    <item
+        android:drawable="@drawable/birds_online_end"
+        android:duration="200" />
+
+    <item
+        android:drawable="@drawable/birds_online_mid"
+        android:duration="100" />
+
+    <item
+        android:drawable="@drawable/birds_online"
         android:duration="100" />
 </animation-list>

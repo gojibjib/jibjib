@@ -20,13 +20,13 @@ import de.cdvost.jibjib.presentation.presenter.IMatchBirdDetailPresenter;
 import de.cdvost.jibjib.presentation.presenter.IMatchViewPresenter;
 import de.cdvost.jibjib.presentation.presenter.MatchBirdDetailPresenter;
 import de.cdvost.jibjib.presentation.presenter.MatchViewPresenter;
+import de.cdvost.jibjib.presentation.presenter.model.BirdItemPresenter;
 import de.cdvost.jibjib.repository.room.model.entity.Bird;
 import de.cdvost.jibjib.threading.MainThreadImpl;
 import de.cdvost.jibjib.threading.ThreadExecutor;
 
 public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPresenter.View {
 
-    public static final String BIRD_ID = "bird_id";
 
     @BindView(R.id.BirdPic)
     ImageView birdPic;
@@ -52,16 +52,17 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
         setContentView(R.layout.match_bird_detail_view);
         this.presenter = new MatchBirdDetailPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
-        birdID = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-        birdId = Integer.parseInt(birdID);
+        BirdItemPresenter bird = (BirdItemPresenter) getIntent().getSerializableExtra("bird");
+        birdID = bird.getBird().getUri();
+        birdId = bird.getBird().getId();
         presenter.getMatchBird(birdId);
-        Intent BirdIntent = getIntent();
 
-        name.setText(birdID);
+        name.setText(bird.getName());
     }
 
     @OnClick(R.id.savebird)
     public void onClick() {
+        // Bird ist schon da kein new
         presenter.saveBird(new Bird(birdId, name.getText().toString(), null,null,null,null,null,null), this);
     }
 

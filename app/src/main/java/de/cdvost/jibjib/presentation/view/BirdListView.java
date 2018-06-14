@@ -51,7 +51,7 @@ public class BirdListView extends Activity implements IBirdListViewPresenter.Vie
         ListAdapter birdListAdapter = new ArrayAdapter(
                 this,
                 R.layout.match_bird_item,
-                R.id.match_bird_text,
+                R.id.match_bird_name,
                 birdListResult);
 
         savedBirds.setAdapter(birdListAdapter);

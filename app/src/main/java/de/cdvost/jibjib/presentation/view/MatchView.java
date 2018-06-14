@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -35,18 +37,20 @@ import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
 import de.cdvost.jibjib.presentation.presenter.IMatchViewPresenter;
 import de.cdvost.jibjib.presentation.presenter.MatchViewPresenter;
+import de.cdvost.jibjib.presentation.presenter.events.MatchBirdEvent;
+import de.cdvost.jibjib.presentation.presenter.model.BirdItemPresenter;
 import de.cdvost.jibjib.repository.room.model.entity.Bird;
 import de.cdvost.jibjib.threading.MainThreadImpl;
 import de.cdvost.jibjib.threading.ThreadExecutor;
 
-public class MatchView extends Activity implements IMatchViewPresenter.View, View.OnClickListener  {
+public class MatchView extends Activity implements IMatchViewPresenter.View, View.OnClickListener, MatchBirdEvent {
 
     @BindView(R.id.textView)
     TextView textView;
     @BindView(R.id.button)
     Button btnMatch;
-    @BindView(R.id.list_match)
-    ListView matchBirds;
+    //@BindView(R.id.list_match)
+    RecyclerView matchBirds;
     @BindView(R.id.progress)
     ProgressBar matchProgress;
     @BindView(R.id.birdlist)
@@ -59,6 +63,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
     public ViewGroup splashScreen;
     @BindView(R.id.splash_screen_image)
     public ImageView splashScreenImage;
+
+    public ArrayList<BirdItemPresenter> matchedBirds = new ArrayList<>();
 
 
     private static final int REQUEST_CODE_PERMISSION_RECORD_AUDIO = 1;
@@ -75,12 +81,14 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         this.presenter = new MatchViewPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
         btnMatch.setOnClickListener(this);
+        matchBirds = (RecyclerView) findViewById(R.id.list_match);
 
         birdbackground.setImageResource(R.drawable.jibjib);
         birdanimation = (AnimationDrawable) birdbackground.getDrawable();
 
         splashScreenImage.setImageResource(R.drawable.splash_animation);
         splashAnimation = (AnimationDrawable) splashScreenImage.getDrawable();
+
     }
 
     @Override
@@ -117,6 +125,17 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
                         .append("\n"));
         textView.setText(builder.toString());*/
 
+        for (MatchedBird result : results) {
+            matchedBirds.add(new BirdItemPresenter(result));
+        }
+
+        RecyclerView.LayoutManager blLayoutManager = new LinearLayoutManager(this);
+        matchBirds.setLayoutManager(blLayoutManager);
+        RecyclerView.Adapter blAdapter = new BirdListAdapter(this, matchedBirds);
+        matchBirds.setAdapter(blAdapter);
+
+
+        /*
         List<String> matchResult = new ArrayList<String>();
         for (MatchedBird result : results) {
             matchResult.add(result.getBird().getName()+" "+result.getAccuracy());
@@ -129,7 +148,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
                 matchResult);
 
         matchBirds.setAdapter(birdListAdapter);
-        matchBirds.setVisibility(View.VISIBLE);
+        matchBirds.setVisibility(View.VISIBLE);*/
         textView.setText("MATCHES");
     }
 
@@ -160,15 +179,15 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         textView.setText("Done");
     }
 
-    @OnItemClick(R.id.list_match)
-    public void onItemClick(int position) {
-        Toast.makeText(this, "on item click" + matchBirds.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+
+    public void itemClick(BirdItemPresenter bird) {
+        //Toast.makeText(this, "on item click" + matchBirds.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, MatchBirdDetailView.class);
         //TODO get ID
         //int id = matchBirds.getItemAtPosition(position);
-        //intent.putExtra(MatchBirdDetailView.BIRD_ID, id);
-        String id = matchBirds.getItemAtPosition(position).toString();
-        intent.putExtra(Intent.EXTRA_TEXT, id);
+        intent.putExtra("bird", bird);
+        //String id = matchBirds.getItemAtPosition(position).toString();
+        //intent.putExtra(Intent.EXTRA_TEXT, id);
         startActivity(intent);
     }
 
@@ -232,4 +251,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         mProgress.setProgress(0);
     }
 
+    @Override
+    public void onItemClick(int id) {
+
+    }
 }
