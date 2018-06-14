@@ -72,66 +72,9 @@
             android:max="80" />
 
         <Button
-            android:id="@+id/rec_button"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="rec"
-            android:textColor="#ffffff"
-            android:background="@drawable/buttonshape"
-            android:backgroundTint="#FFFD7455"
-            android:layout_below="@+id/determinateBar"
-            android:layout_margin="10dp" />
 
-        <Button
-            android:id="@+id/rec_stop_button"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="stop rec"
-            android:layout_below="@+id/determinateBar"
-            android:textColor="#ffffff"
-            android:background="@drawable/buttonshape"
-            android:layout_centerHorizontal="true"
-            android:backgroundTint="#FFFD7455"
-
-            android:layout_margin="10dp" />
-
-        <Button
-            android:id="@+id/play_button"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="play rec"
-            android:layout_below="@+id/rec_button"
-            android:textColor="#ffffff"
-            android:background="@drawable/buttonshape"
-            android:backgroundTint="#FFFD7455"
-            android:layout_marginStart="10dp" />
-
-        <Button
-            android:id="@+id/stop_button"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="stop"
-            android:layout_below="@+id/rec_stop_button"
-            android:layout_centerHorizontal="true"
-            android:textColor="#ffffff"
-            android:background="@drawable/buttonshape"
-            android:backgroundTint="#FFFD7455" />
-
-        <Button
-            android:id="@+id/new_rec_button"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:text="new"
-            android:textColor="#ffffff"
-            android:background="@drawable/buttonshape"
-            android:backgroundTint="#FFFD7455"
-            android:layout_below="@+id/rec_stop_button"
-            android:layout_toRightOf="@+id/stop_button"
-            android:layout_marginStart="20dp" />
-
-        <Button
-            android:layout_below="@+id/stop_button"
             android:id="@+id/button"
+            android:layout_below="@+id/determinateBar"
             android:layout_margin="10dp"
             android:layout_width="110dp"
             android:layout_height="40dp"
@@ -146,7 +89,8 @@
         android:id="@+id/splash_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffff">
+        android:background="#ffff"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/splash_screen_image"

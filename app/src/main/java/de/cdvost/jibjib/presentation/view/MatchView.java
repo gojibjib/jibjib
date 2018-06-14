@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -25,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +36,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+import butterknife.OnLongClick;
+import butterknife.OnTouch;
 import de.cdvost.jibjib.R;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
@@ -43,7 +49,7 @@ import de.cdvost.jibjib.repository.room.model.entity.Bird;
 import de.cdvost.jibjib.threading.MainThreadImpl;
 import de.cdvost.jibjib.threading.ThreadExecutor;
 
-public class MatchView extends Activity implements IMatchViewPresenter.View, View.OnClickListener, MatchBirdEvent {
+public class MatchView extends Activity implements IMatchViewPresenter.View {
 
     @BindView(R.id.textView)
     TextView textView;
@@ -80,7 +86,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         setContentView(R.layout.match_view_layout);
         this.presenter = new MatchViewPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
-        btnMatch.setOnClickListener(this);
+        //btnMatch.setOnClickListener(this);
         matchBirds = (RecyclerView) findViewById(R.id.list_match);
 
         birdbackground.setImageResource(R.drawable.jibjib);
@@ -103,16 +109,17 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         };
 
         Handler splashHandler = new Handler();
-        splashHandler.postDelayed(progress, 7000);
+        splashHandler.postDelayed(progress, 3000);
 
 
     }
-    @Override
+
+    /*@Override
     public void onClick(View view) {
         if (view.getId() == R.id.button) {
             presenter.matchSound(this);
         }
-    }
+    }*/
     @Override
     public void showMatchResults(List<MatchedBird> results) {
 
@@ -197,6 +204,25 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         startActivity(intent);
     }
 
+    @OnTouch(R.id.button)
+    public boolean onTouch(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                Log.i("TAG", "touched down");
+                startRecord();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.i("TAG", "moving:");
+                break;
+            case MotionEvent.ACTION_UP:
+                Log.i("TAG", "touched up");
+                stopRecord();
+                presenter.matchSound(this);
+                break;
+        }
+        return true;
+    }
+
     @Override
     public void showProgress() {
         //matchProgress.setVisibility(View.VISIBLE);
@@ -216,7 +242,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
 
     }
 
-    @OnClick(R.id.rec_button)
     public void startRecord() {
         Toast.makeText(this, "Start Record", Toast.LENGTH_SHORT).show();
         if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)) {
@@ -226,33 +251,11 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Vie
         }
     }
 
-    @OnClick(R.id.rec_stop_button)
     public void stopRecord() {
         Toast.makeText(this, "Stop Record", Toast.LENGTH_SHORT).show();
         presenter.stopRecording();
     }
 
-    @OnClick(R.id.play_button)
-    public void playRecord() {
-        Toast.makeText(this, "Play Record", Toast.LENGTH_SHORT).show();
-        presenter.startStopRecordingPlayback();
-    }
 
-    @OnClick(R.id.stop_button)
-    public void stopRecordPlay() {
-        Toast.makeText(this, "Stop Record Play", Toast.LENGTH_SHORT).show();
-        presenter.stopRecordingPlayback();
-    }
 
-    @OnClick(R.id.new_rec_button)
-    public void newRecord() {
-        Toast.makeText(this, "New Record", Toast.LENGTH_SHORT).show();
-        textView.setText("Birdcall audible?");
-        mProgress.setProgress(0);
-    }
-
-    @Override
-    public void onItemClick(int id) {
-
-    }
 }
