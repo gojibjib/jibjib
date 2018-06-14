@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -135,8 +136,8 @@ public class MatchViewPresenter extends AbstractPresenter
         mediaRecorder = new MediaRecorder();
         mediaRecorder.reset();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         mediaRecorder.setMaxDuration(MAX_RECORDING_TIME);
 
         mediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
