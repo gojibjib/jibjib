@@ -52,7 +52,7 @@ public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHo
         nameValues = new ArrayList<>();
         accuracyValues = new ArrayList<>();
         for (BirdItemPresenter bird : myDataset) {
-            nameValues.add(bird.getName());
+            nameValues.add(bird.getBird().getTitle_de() + "\n" + "(" + bird.getName() + ")");
             accuracyValues.add(Float.toString(bird.getAccuracy()));
         }
     }
