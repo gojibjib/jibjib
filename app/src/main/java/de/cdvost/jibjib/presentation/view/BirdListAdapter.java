@@ -76,7 +76,7 @@ public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHo
         final String name = nameValues.get(position);
         final String accuracy = accuracyValues.get(position);
         holder.birdName.setText(name);
-        holder.birdName.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mView.itemClick(birdDataset.get(position));
