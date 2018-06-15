@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/match_bird_name"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_weight="0.5"
         android:layout_height="wrap_content"
         android:text="Bird"

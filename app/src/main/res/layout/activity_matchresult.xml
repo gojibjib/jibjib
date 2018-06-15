@@ -13,6 +13,17 @@
 
     </ImageView>
 
+    <TextView
+        android:id="@+id/BirdList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:paddingTop="40dp"
+        android:paddingLeft="40dp"
+        android:text="MATCHED BIRDS"
+        android:textColor="@color/ciRed"
+        android:textSize="20sp"
+        android:textStyle="normal" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_match"

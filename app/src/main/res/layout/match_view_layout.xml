@@ -7,13 +7,20 @@
     android:id="@+id/mainview"
     android:background="#FFFF">
 
+    <ImageView
+        android:id="@+id/bird_background_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/matching_animatio_start"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/bird_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-
         android:layout_alignParentTop="true"
         android:src="@drawable/birds_online" />
 
@@ -123,8 +130,7 @@
         android:id="@+id/splash_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffff"
-        android:visibility="gone">
+        android:background="#ffff">
 
         <ImageView
             android:id="@+id/splash_screen_image"

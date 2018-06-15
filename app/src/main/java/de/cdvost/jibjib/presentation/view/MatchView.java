@@ -62,6 +62,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     @BindView(R.id.splash_screen_image)
     public ImageView splashScreenImage;
 
+    @BindView(R.id.bird_background_empty)
+    public ImageView backgroundEmpty;
     @BindView(R.id.clouds)
     public ViewGroup clouds;
     @BindView(R.id.cloud1)
@@ -72,6 +74,11 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     public ImageView cloud3;
     @BindView(R.id.cloud4)
     public ImageView cloud4;
+
+    private AnimatorSet movecloud1;
+    private AnimatorSet movecloud2;
+    private AnimatorSet movecloud3;
+    private AnimatorSet movecloud4;
 
     private static final int REQUEST_CODE_PERMISSION_RECORD_AUDIO = 1;
     private IMatchViewPresenter presenter;
@@ -190,24 +197,33 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     }
 
     public void startMatchAnimation() {
+
+        backgroundEmpty.setVisibility(View.VISIBLE);
+        AlphaAnimation animate = new AlphaAnimation(1.0f, 0.0f);
+        animate.setDuration(1000);
+        birdbackground.startAnimation(animate);
+        birdbackground.setVisibility(View.GONE);
+        //clouds.startAnimation(animate);
         clouds.setVisibility(View.VISIBLE);
-        birdbackground.setImageResource(R.drawable.matching_animatio_start);
-        AnimatorSet movecloud1 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move0);
+
+        //birdbackground.setImageResource(R.drawable.matching_animatio_start);
+        movecloud1 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move0);
         movecloud1.setTarget(cloud1);
 
-        AnimatorSet movecloud2 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move1);
+        movecloud2 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move1);
         movecloud2.setTarget(cloud2);
 
-        AnimatorSet movecloud3 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move2);
+        movecloud3 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move2);
         movecloud3.setTarget(cloud3);
 
-        AnimatorSet movecloud4 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move3);
+        movecloud4 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move3);
         movecloud4.setTarget(cloud4);
 
         movecloud1.start();
         movecloud2.start();
         movecloud3.start();
         movecloud4.start();
+
     }
 
 
@@ -253,10 +269,12 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     @Override
     public void onResume() {
         super.onResume();
+        birdbackground.setVisibility(View.VISIBLE);
         mProgress.setProgress(0);
         clouds.setVisibility(View.GONE);
-        birdbackground.setImageResource(R.drawable.jibjib);
-        birdanimation = (AnimationDrawable) birdbackground.getDrawable();
+        backgroundEmpty.setVisibility(View.GONE);
+        //birdbackground.setImageResource(R.drawable.jibjib);
+        //birdanimation = (AnimationDrawable) birdbackground.getDrawable();
     }
 
     @Override
@@ -266,5 +284,15 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
         animate.setDuration(1000);
         clouds.startAnimation(animate);
         clouds.setVisibility(View.GONE);
+        if (movecloud1 != null) {
+            movecloud1.cancel();
+            movecloud2.cancel();
+            movecloud3.cancel();
+            movecloud4.cancel();
+        }
+
+        // backgroundEmpty.startAnimation(animate);
+        //backgroundEmpty.setVisibility(View.GONE);
+
     }
 }

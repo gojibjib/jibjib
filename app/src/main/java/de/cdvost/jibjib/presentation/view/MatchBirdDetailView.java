@@ -1,6 +1,8 @@
 package de.cdvost.jibjib.presentation.view;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -92,5 +94,6 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
     public void showError(String message) {
 
     }
+
 
 }

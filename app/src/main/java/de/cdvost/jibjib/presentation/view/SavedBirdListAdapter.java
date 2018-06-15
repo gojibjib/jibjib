@@ -28,6 +28,8 @@ public class SavedBirdListAdapter extends RecyclerView.Adapter<SavedBirdListAdap
             super(v);
             layout = v;
             birdName = (TextView) v.findViewById(R.id.match_bird_name);
+            birdAccuracy = (TextView) v.findViewById(R.id.match_bird_accuracy);
+            birdAccuracy.setVisibility(View.GONE);
         }
     }
 
@@ -47,7 +49,7 @@ public class SavedBirdListAdapter extends RecyclerView.Adapter<SavedBirdListAdap
         birdDataset = myDataset;
         nameValues = new ArrayList<>();
         for (Bird bird : myDataset) {
-            nameValues.add(bird.getTitle_de() + "\n" + "(" + bird.getName() + ")");
+            nameValues.add(bird.getTitle_de() + "    " + "(" + bird.getName() + ")");
             //accuracyValues.add(Float.toString(bird.getAccuracy()));
         }
     }

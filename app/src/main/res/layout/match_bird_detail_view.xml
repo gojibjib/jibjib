@@ -8,12 +8,13 @@
     <ImageView
         android:id="@+id/BirdPic"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_gravity="top"
         android:layout_margin="20dp"
         android:padding="20dp"
         android:src="@drawable/jibjib_pic_s" />
+
 
     <TextView
         android:id="@+id/BirdName"
@@ -22,10 +23,10 @@
         android:layout_alignStart="@+id/URI"
         android:layout_below="@+id/BirdPic"
         android:layout_gravity="top"
-        android:paddingTop="40dp"
+
         android:text="Name"
         android:textColor="@color/ciRed"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -40,12 +41,13 @@
         android:paddingTop="20dp"
         android:text="URI"
         android:textColor="@color/colorContentText"
-        android:textSize="15sp" />
+        android:textSize="13sp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_gravity="top"
         android:paddingTop="20dp"
         android:layout_below="@+id/URI"
@@ -58,7 +60,7 @@
             android:id="@+id/BirdNutrition"
             android:text="Description"
             android:textColor="@color/colorContentText"
-            android:textSize="15sp"/>
+            android:textSize="13sp" />
     </ScrollView>
 
     <Button
