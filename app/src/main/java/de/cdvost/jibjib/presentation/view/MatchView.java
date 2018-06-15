@@ -163,7 +163,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
         //TODO: reset background
         Intent intent = new Intent(this, MatchResultView.class);
         intent.putExtra(EXTRA_BIRD_LIST, results);
-        startActivity(intent);
+        startActivity(intent,
+                ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     @OnClick(R.id.birdlist)

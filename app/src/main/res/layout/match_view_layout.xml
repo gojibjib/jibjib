@@ -82,7 +82,8 @@
         android:id="@+id/splash_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffff">
+        android:background="#ffff"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/splash_screen_image"

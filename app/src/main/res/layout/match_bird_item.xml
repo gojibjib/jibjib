@@ -2,25 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/buttonshape"
+    android:backgroundTint="#ffff"
+    android:layout_marginBottom="10dp"
+    android:elevation="3dp">
 
     <TextView
         android:id="@+id/match_bird_name"
-        android:layout_width="200dp"
-        android:layout_weight="0.7"
+        android:layout_width="150dp"
+        android:layout_weight="0.5"
         android:layout_height="wrap_content"
         android:text="Bird"
-        android:textSize="13dp"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:textColor="@color/ciRed"
+        android:layout_marginLeft="10dp"
         android:padding="10dp" />
 
     <TextView
         android:id="@+id/match_bird_accuracy"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
+        android:layout_weight="0.5"
+        android:layout_marginTop="7dp"
         android:layout_toRightOf="@+id/match_bird_name"
         android:text="75483"
-        android:textSize="13dp"
+        android:textSize="14dp"
+        android:textColor="@color/ciRed"
         android:padding="10dp" />
 
 </LinearLayout>
