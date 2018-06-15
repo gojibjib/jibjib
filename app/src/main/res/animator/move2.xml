@@ -2,25 +2,14 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:interpolator="@android:anim/accelerate_decelerate_interpolator">
 
-    <objectAnimator
-        android:propertyName="rotation"
-        android:duration="5009"
-        android:repeatCount="-1"
-        android:repeatMode="reverse"
-        android:valueTo="200" />
+
 
     <objectAnimator
         android:propertyName="x"
         android:duration="5500"
         android:repeatCount="-1"
         android:repeatMode="reverse"
-        android:valueTo="100" />
+        android:valueTo="-100" />
 
-    <objectAnimator
-        android:propertyName="y"
-        android:duration="5500"
-        android:repeatCount="-1"
-        android:repeatMode="reverse"
-        android:valueTo="780" />
 
 </set>
