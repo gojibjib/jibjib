@@ -88,7 +88,7 @@ public class BirdListView extends Activity implements IBirdListViewPresenter.Vie
 
     public void itemClick(Bird bird) {
         Intent intent = new Intent(this, MatchBirdDetailView.class);
-        intent.putExtra(MatchBirdDetailView.EXTRA_BIRD_KEY, new MatchedBird(bird, -1));
+        intent.putExtra(MatchBirdDetailView.EXTRA_BIRD_KEY, new MatchedBird(bird, -1, true));
         startActivity(intent);
     }
 

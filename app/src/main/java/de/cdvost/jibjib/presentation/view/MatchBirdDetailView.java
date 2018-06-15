@@ -3,6 +3,7 @@ package de.cdvost.jibjib.presentation.view;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,6 +58,9 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
         }
         name.setText(title);
         nutrition.setText(bird.getBird().getDescription_de());
+        if(bird.isInDataBase()){
+            saveBird.setVisibility(View.GONE);
+        }
     }
 
     @OnClick(R.id.savebird)
