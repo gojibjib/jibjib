@@ -7,12 +7,11 @@ import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
 import de.cdvost.jibjib.domain.interactors.room.IStoreBirdInteractor;
 import de.cdvost.jibjib.domain.interactors.room.impl.StoreBirdInteractor;
-import de.cdvost.jibjib.domain.interactors.web.IGetBirdDetailsInteractor;
 import de.cdvost.jibjib.presentation.presenter.base.AbstractPresenter;
 import de.cdvost.jibjib.repository.room.model.entity.Bird;
 
 
-public class MatchBirdDetailPresenter extends AbstractPresenter implements IMatchBirdDetailPresenter, IGetBirdDetailsInteractor.Callback, IStoreBirdInteractor.Callback {
+public class MatchBirdDetailPresenter extends AbstractPresenter implements IMatchBirdDetailPresenter, IStoreBirdInteractor.Callback {
 
     private IMatchBirdDetailPresenter.View view;
 
@@ -47,23 +46,8 @@ public class MatchBirdDetailPresenter extends AbstractPresenter implements IMatc
     }
 
     @Override
-    public void getMatchBird(int id) {
-
-    }
-
-    @Override
     public void saveBird(Bird bird, Context context) {
         new StoreBirdInteractor(executor, mainThread, this, bird, context).execute();
-    }
-
-    @Override
-    public void onBirdReceived(Bird bird) {
-
-    }
-
-    @Override
-    public void onExecutionFailed(Object fail) {
-
     }
 
     @Override

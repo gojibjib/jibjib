@@ -13,7 +13,5 @@ public interface IMatchBirdDetailPresenter extends IPresenter {
         public void showBirdSavedHint();
     }
 
-    public void getMatchBird(int id);
-
     public void saveBird(Bird bird, Context context);
 }

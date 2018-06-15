@@ -16,43 +16,28 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.TranslateAnimation;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
-import butterknife.OnLongClick;
 import butterknife.OnTouch;
 import de.cdvost.jibjib.R;
-import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
 import de.cdvost.jibjib.presentation.presenter.IMatchViewPresenter;
 import de.cdvost.jibjib.presentation.presenter.MatchViewPresenter;
-import de.cdvost.jibjib.presentation.presenter.events.MatchBirdEvent;
-import de.cdvost.jibjib.presentation.presenter.model.BirdItemPresenter;
-import de.cdvost.jibjib.repository.room.model.entity.Bird;
 import de.cdvost.jibjib.threading.MainThreadImpl;
 import de.cdvost.jibjib.threading.ThreadExecutor;
 
@@ -83,10 +68,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     public ImageView cloud3;
     @BindView(R.id.cloud4)
     public ImageView cloud4;
-
-    public ArrayList<BirdItemPresenter> matchedBirds = new ArrayList<>();
-
-    public static final String EXTRA_BIRD_LIST = "matchResultBirdList";
 
     private static final int REQUEST_CODE_PERMISSION_RECORD_AUDIO = 1;
     private IMatchViewPresenter presenter;
@@ -172,7 +153,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     public void showMatchResults(ArrayList<MatchedBird> results) {
         //TODO: reset background
         Intent intent = new Intent(this, MatchResultView.class);
-        intent.putExtra(EXTRA_BIRD_LIST, results);
+        intent.putExtra(MatchResultView.EXTRA_BIRD_LIST, results);
         startActivity(intent,
                 ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }

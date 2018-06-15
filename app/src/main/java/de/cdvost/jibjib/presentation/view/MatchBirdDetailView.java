@@ -1,7 +1,6 @@
 package de.cdvost.jibjib.presentation.view;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Button;
@@ -9,18 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 import de.cdvost.jibjib.R;
+import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
 import de.cdvost.jibjib.presentation.presenter.IMatchBirdDetailPresenter;
-import de.cdvost.jibjib.presentation.presenter.IMatchViewPresenter;
 import de.cdvost.jibjib.presentation.presenter.MatchBirdDetailPresenter;
-import de.cdvost.jibjib.presentation.presenter.MatchViewPresenter;
-import de.cdvost.jibjib.presentation.presenter.model.BirdItemPresenter;
 import de.cdvost.jibjib.repository.room.model.entity.Bird;
 import de.cdvost.jibjib.threading.MainThreadImpl;
 import de.cdvost.jibjib.threading.ThreadExecutor;
@@ -41,11 +35,11 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
     @BindView(R.id.savebird)
     Button saveBird;
 
-    private String birdID;
-    private int birdId;
-    private BirdItemPresenter bird;
+    private MatchedBird bird;
 
     private IMatchBirdDetailPresenter presenter;
+
+    public static final String EXTRA_BIRD_KEY = "bird";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,10 +47,7 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
         setContentView(R.layout.match_bird_detail_view);
         this.presenter = new MatchBirdDetailPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
-        this.bird = (BirdItemPresenter) getIntent().getSerializableExtra("bird");
-        birdID = bird.getBird().getUri();
-        birdId = bird.getBird().getId();
-        presenter.getMatchBird(birdId);
+        this.bird = (MatchedBird) getIntent().getSerializableExtra(EXTRA_BIRD_KEY);
 
         name.setText(bird.getBird().getTitle_de());
     }
@@ -73,7 +64,7 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
 
     @Override
     public void showBirdSavedHint() {
-        Toast.makeText(this, "bird saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Bird saved to data base", Toast.LENGTH_SHORT).show();
     }
 
     @Override

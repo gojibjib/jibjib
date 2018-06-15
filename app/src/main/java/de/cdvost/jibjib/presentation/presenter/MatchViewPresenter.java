@@ -4,25 +4,19 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import de.cdvost.jibjib.domain.executor.Executor;
 import de.cdvost.jibjib.domain.executor.MainThread;
 import de.cdvost.jibjib.domain.interactors.room.IStoreBirdInteractor;
-import de.cdvost.jibjib.domain.interactors.web.IGetBirdDetailsInteractor;
 import de.cdvost.jibjib.domain.interactors.web.IMatchSoundInteractor;
-import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
-import de.cdvost.jibjib.domain.interactors.web.impl.GetBirdDetailsInteractorImpl;
 import de.cdvost.jibjib.domain.interactors.web.impl.MatchSoundInteractorImpl;
 import de.cdvost.jibjib.presentation.presenter.base.AbstractPresenter;
-import de.cdvost.jibjib.repository.room.model.entity.Bird;
 
 public class MatchViewPresenter extends AbstractPresenter
         implements IMatchViewPresenter,

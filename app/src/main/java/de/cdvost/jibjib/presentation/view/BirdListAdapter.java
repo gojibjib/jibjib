@@ -9,16 +9,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import de.cdvost.jibjib.R;
-import de.cdvost.jibjib.presentation.presenter.model.BirdItemPresenter;
+import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
 
 
 public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHolder> {
     private List<String> nameValues;
     private List<String> accuracyValues;
-    List<BirdItemPresenter> birdDataset;
+    List<MatchedBird> birdDataset;
     MatchResultView mView;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -47,13 +45,13 @@ public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHo
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public BirdListAdapter(MatchResultView view, List<BirdItemPresenter> myDataset) {
+    public BirdListAdapter(MatchResultView view, List<MatchedBird> myDataset) {
         mView = view;
         birdDataset = myDataset;
         nameValues = new ArrayList<>();
         accuracyValues = new ArrayList<>();
-        for (BirdItemPresenter bird : myDataset) {
-            nameValues.add(bird.getBird().getTitle_de() + "\n" + "(" + bird.getName() + ")");
+        for (MatchedBird bird : myDataset) {
+            nameValues.add(bird.getBird().getTitle_de() + "\n" + "(" + bird.getBird().getName() + ")");
             accuracyValues.add(Float.toString(bird.getAccuracy()));
         }
     }
