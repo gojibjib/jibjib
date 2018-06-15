@@ -87,7 +87,6 @@ public class MatchViewPresenter extends AbstractPresenter
 
     public void startRecording() {
         if(!isRecording) {
-            isRecording = true;
 
             mediaRecorder = new MediaRecorder();
             mediaRecorder.reset();

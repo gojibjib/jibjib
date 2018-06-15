@@ -25,7 +25,7 @@
         android:textSize="20sp"
         android:textStyle="normal" />
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/list_saved_birds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
