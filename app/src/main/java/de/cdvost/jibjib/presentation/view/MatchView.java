@@ -1,7 +1,10 @@
 package de.cdvost.jibjib.presentation.view;
 
 import android.Manifest;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.animation.LayoutTransition;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -72,6 +75,15 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     @BindView(R.id.splash_screen_image)
     public ImageView splashScreenImage;
 
+    @BindView(R.id.cloud1)
+    public ImageView cloud1;
+    @BindView(R.id.cloud2)
+    public ImageView cloud2;
+    @BindView(R.id.cloud3)
+    public ImageView cloud3;
+    @BindView(R.id.cloud4)
+    public ImageView cloud4;
+
     public ArrayList<BirdItemPresenter> matchedBirds = new ArrayList<>();
 
     public static final String EXTRA_BIRD_LIST = "matchResultBirdList";
@@ -96,16 +108,14 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
         birdbackground.setImageResource(R.drawable.jibjib);
         birdanimation = (AnimationDrawable) birdbackground.getDrawable();
 
-        splashScreenImage.setImageResource(R.drawable.splash_animation);
-        splashAnimation = (AnimationDrawable) splashScreenImage.getDrawable();
-
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        splashScreenImage.setImageResource(R.drawable.splash_animation);
+        splashAnimation = (AnimationDrawable) splashScreenImage.getDrawable();
         /*splashScreen.getLayoutTransition()
                 .enableTransitionType(LayoutTransition.DISAPPEARING);*/
         //splashScreen.getLayoutTransition().setDuration(3000);
@@ -189,12 +199,49 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
                 Log.i("TAG", "touched up");
                 btnMatch.setBackgroundResource(R.drawable.buttonshape_outline);
                 stopRecord();
-
+                startMatchAnimation();
                 //TODO: change background with matching animation
                 presenter.matchSound(this);
                 break;
         }
         return true;
+    }
+
+    public void startMatchAnimation() {
+        birdbackground.setImageResource(R.drawable.matching_animatio_start);
+        cloud1.setVisibility(View.VISIBLE);
+        AnimatorSet movecloud1 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move0);
+        movecloud1.setTarget(cloud1);
+
+        cloud2.setVisibility(View.VISIBLE);
+        AnimatorSet movecloud2 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move1);
+        movecloud2.setTarget(cloud2);
+
+        cloud3.setVisibility(View.VISIBLE);
+        AnimatorSet movecloud3 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move2);
+        movecloud3.setTarget(cloud3);
+
+        cloud4.setVisibility(View.VISIBLE);
+        AnimatorSet movecloud4 = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.move3);
+        movecloud4.setTarget(cloud4);
+
+        movecloud1.start();
+        movecloud2.start();
+        movecloud3.start();
+        movecloud4.start();
+    }
+
+    public void stopAnimation() {
+        birdbackground.setImageResource(R.drawable.jibjib);
+
+        cloud1.setVisibility(View.GONE);
+
+        cloud2.setVisibility(View.GONE);
+
+        cloud3.setVisibility(View.GONE);
+
+        cloud4.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -230,6 +277,15 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
         presenter.stopRecording();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        stopAnimation();
+    }
 
-
+   /* @Override
+    public void onPause(){
+        super.onPause();
+        birdbackground.setImageResource(R.drawable.jibjib);
+    }*/
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator">
+
+    <objectAnimator
+        android:propertyName="rotation"
+        android:duration="6009"
+        android:repeatCount="-1"
+        android:repeatMode="reverse"
+        android:valueTo="300" />
+
+    <objectAnimator
+        android:propertyName="x"
+        android:duration="5500"
+        android:repeatCount="-1"
+        android:repeatMode="reverse"
+        android:valueTo="200" />
+
+    <objectAnimator
+        android:propertyName="y"
+        android:duration="5500"
+        android:repeatCount="-1"
+        android:repeatMode="reverse"
+        android:valueTo="270" />
+
+</set>
