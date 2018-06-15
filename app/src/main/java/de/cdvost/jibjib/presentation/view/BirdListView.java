@@ -45,7 +45,7 @@ public class BirdListView extends Activity implements IBirdListViewPresenter.Vie
     public void showBirdList(List<Bird> birdList) {
         List<String> birdListResult = new ArrayList<String>();
         for (Bird result : birdList) {
-            birdListResult.add(result.getName());
+            birdListResult.add(result.getTitle_de() + "     " + "(" + result.getName() + ")");
         }
 
         ListAdapter birdListAdapter = new ArrayAdapter(

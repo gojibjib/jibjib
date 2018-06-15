@@ -11,8 +11,9 @@
         android:layout_height="220dp"
         android:layout_alignParentTop="true"
         android:layout_gravity="top"
-        android:src="@drawable/testbird"
-        android:scaleType="centerCrop" />
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:src="@drawable/jibjib_pic_s" />
 
     <TextView
         android:id="@+id/BirdName"
@@ -23,7 +24,7 @@
         android:layout_gravity="top"
         android:paddingTop="40dp"
         android:text="Name"
-        android:textColor="@color/colorAccentText"
+        android:textColor="@color/ciRed"
         android:textSize="20sp"
         android:textStyle="bold" />
 

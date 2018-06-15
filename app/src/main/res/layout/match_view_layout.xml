@@ -34,6 +34,7 @@
         android:layout_height="40dp"
         android:textColor="#b4b4b4"
         android:layout_margin="25dp"
+        android:paddingRight="10dp"
         android:layout_centerInParent="true"
         android:layout_alignParentTop="true" />
 
@@ -74,7 +75,6 @@
             android:layout_centerInParent="true"
             android:textColor="@color/ciRed"
             android:background="@drawable/buttonshape_outline"
-
             android:text="Match" />
     </RelativeLayout>
 

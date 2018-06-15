@@ -43,6 +43,7 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
 
     private String birdID;
     private int birdId;
+    private BirdItemPresenter bird;
 
     private IMatchBirdDetailPresenter presenter;
 
@@ -52,18 +53,17 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
         setContentView(R.layout.match_bird_detail_view);
         this.presenter = new MatchBirdDetailPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
-        BirdItemPresenter bird = (BirdItemPresenter) getIntent().getSerializableExtra("bird");
+        this.bird = (BirdItemPresenter) getIntent().getSerializableExtra("bird");
         birdID = bird.getBird().getUri();
         birdId = bird.getBird().getId();
         presenter.getMatchBird(birdId);
 
-        name.setText(bird.getName());
+        name.setText(bird.getBird().getTitle_de());
     }
 
     @OnClick(R.id.savebird)
     public void onClick() {
-        // Bird ist schon da kein new
-        presenter.saveBird(new Bird(birdId, name.getText().toString(), null,null,null,null,null,null), this);
+        presenter.saveBird(bird.getBird(), this);
     }
 
     @Override

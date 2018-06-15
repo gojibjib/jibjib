@@ -27,9 +27,9 @@
         android:layout_weight="0.5"
         android:layout_marginTop="7dp"
         android:layout_toRightOf="@+id/match_bird_name"
-        android:text="75483"
         android:textSize="14dp"
         android:textColor="@color/ciRed"
+        android:visibility="gone"
         android:padding="10dp" />
 
 </LinearLayout>

@@ -32,6 +32,7 @@ public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHo
             layout = v;
             birdName = (TextView) v.findViewById(R.id.match_bird_name);
             birdAccuracy = (TextView) v.findViewById(R.id.match_bird_accuracy);
+            birdAccuracy.setVisibility(View.VISIBLE);
         }
     }
 

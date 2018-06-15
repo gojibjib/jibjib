@@ -4,25 +4,36 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
+    <ImageView
+        android:id="@+id/bird_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_wave_h"
+        android:translationY="-75dp">
+
+    </ImageView>
+
     <TextView
         android:id="@+id/BirdList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:paddingTop="40dp"
-        android:paddingLeft="40dp"
-        android:text="Birdlist"
-        android:textColor="@color/colorAccentText"
+        android:paddingLeft="50dp"
+        android:text="Your collection"
+        android:textColor="@color/ciRed"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="normal" />
 
     <ListView
         android:id="@+id/list_saved_birds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="40dp"
-        android:paddingLeft="40dp"
-        android:background="#ffffff"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp"
         android:layout_below="@+id/BirdList" />
 
 </RelativeLayout>
