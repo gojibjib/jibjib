@@ -86,49 +86,51 @@ public class MatchViewPresenter extends AbstractPresenter
     }
 
     public void startRecording() {
-        isRecording = true;
+        if(!isRecording) {
+            isRecording = true;
 
-        mediaRecorder = new MediaRecorder();
-        mediaRecorder.reset();
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-        mediaRecorder.setMaxDuration(MAX_RECORDING_TIME);
+            mediaRecorder = new MediaRecorder();
+            mediaRecorder.reset();
+            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+            mediaRecorder.setMaxDuration(MAX_RECORDING_TIME);
 
-        mediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
+            mediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
 
-            public void onInfo(MediaRecorder mr, int what, int extra) {
-                if (what != MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED)
-                    return;
+                public void onInfo(MediaRecorder mr, int what, int extra) {
+                    if (what != MediaRecorder.MEDIA_RECORDER_INFO_MAX_DURATION_REACHED)
+                        return;
 
-                stopRecording();
+                    stopRecording();
+                }
+            });
+
+            mediaRecorder.setOnErrorListener(new MediaRecorder.OnErrorListener() {
+
+                public void onError(MediaRecorder mr, int what, int extra) {
+                    Log.e("StoryActivity", "An error occurred while recording audio, code " + what + ", extra: " + extra);
+
+                }
+            });
+
+            try {
+                File file = getRecordingFile();
+                if (file.exists())
+                    file.delete();
+
+                mediaRecorder.setOutputFile(file.getAbsolutePath());
+                mediaRecorder.prepare();
+            } catch (IOException io) {
+                Log.e("StoryActivity", "Could not prepare audio recording: " + io.getMessage());
+                return;
             }
-        });
 
-        mediaRecorder.setOnErrorListener(new MediaRecorder.OnErrorListener() {
+            mediaRecorder.start();
+            isRecording = true;
 
-            public void onError(MediaRecorder mr, int what, int extra) {
-                Log.e("StoryActivity", "An error occurred while recording audio, code " + what + ", extra: " + extra);
-
-            }
-        });
-
-        try {
-            File file = getRecordingFile();
-            if (file.exists())
-                file.delete();
-
-            mediaRecorder.setOutputFile(file.getAbsolutePath());
-            mediaRecorder.prepare();
-        } catch (IOException io) {
-            Log.e("StoryActivity", "Could not prepare audio recording: " + io.getMessage());
-            return;
+            view.updateProgressBar();
         }
-
-        mediaRecorder.start();
-        isRecording = true;
-
-        view.updateProgressBar();
     }
 
     public File getRecordingFile() {
@@ -136,15 +138,16 @@ public class MatchViewPresenter extends AbstractPresenter
     }
 
     public void stopRecording() {
-        isRecording = false;
+        if(isRecording) {
+            isRecording = false;
 
-        if (mediaRecorder == null)
-            return;
-        view.stopProgressBar();
-        mediaRecorder.stop();
-        mediaRecorder.reset();
-        mediaRecorder.release();
-        mediaRecorder = null;
-
+            if (mediaRecorder == null)
+                return;
+            view.stopProgressBar();
+            mediaRecorder.stop();
+            mediaRecorder.reset();
+            mediaRecorder.release();
+            mediaRecorder = null;
+        }
     }
 }
