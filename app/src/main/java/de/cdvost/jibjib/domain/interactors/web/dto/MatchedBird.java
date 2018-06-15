@@ -10,10 +10,12 @@ public class MatchedBird implements Serializable {
 
     private Bird bird;
     private float accuracy;
+    boolean isInDataBase;
 
-    public MatchedBird(Bird bird, float accuracy) {
+    public MatchedBird(Bird bird, float accuracy, boolean isInDataBase) {
         this.bird = bird;
         this.accuracy = accuracy;
+        this.isInDataBase = isInDataBase;
     }
 
     public Bird getBird() {
@@ -24,4 +26,7 @@ public class MatchedBird implements Serializable {
         return accuracy;
     }
 
+    public boolean isInDataBase() {
+        return isInDataBase;
+    }
 }

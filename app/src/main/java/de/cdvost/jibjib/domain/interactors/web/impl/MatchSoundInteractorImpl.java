@@ -68,7 +68,7 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
             for (MatchResult result : matchResults) {
                 Bird bird = roomDataBaseRepository.loadBirdById(result.getId(), context);
                 if (bird != null) {
-                    birds.add(new MatchedBird(bird, result.getAccuracy()));
+                    birds.add(new MatchedBird(bird, result.getAccuracy(), true));
                 } else {
                     String response = new BirdWebServiceImpl().getMatchBird(result.getId());
                     bird = BirdDetailsParser.parse(response);
@@ -77,7 +77,7 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
                         bird.setDescription_de(WikiTextCleaner.cleanData(bird.getDescription_de()));
                         bird.setDescription_en(WikiTextCleaner.cleanData(bird.getDescription_en()));
 
-                        birds.add(new MatchedBird(bird, result.getAccuracy()));
+                        birds.add(new MatchedBird(bird, result.getAccuracy(), false));
                     }
                 }
             }
