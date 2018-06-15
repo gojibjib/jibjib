@@ -137,17 +137,25 @@ public class MatchViewPresenter extends AbstractPresenter
         return view.getFileStreamPath();
     }
 
+    public void cleanUpMediaRecorder(){
+        if(mediaRecorder==null){
+            return;
+        }
+        mediaRecorder.reset();
+        mediaRecorder.release();
+        mediaRecorder = null;
+    }
+
     public void stopRecording() {
-        if(isRecording) {
+        if (isRecording) {
             isRecording = false;
 
             if (mediaRecorder == null)
                 return;
             view.stopProgressBar();
             mediaRecorder.stop();
-            mediaRecorder.reset();
-            mediaRecorder.release();
-            mediaRecorder = null;
+            cleanUpMediaRecorder();
         }
     }
+
 }

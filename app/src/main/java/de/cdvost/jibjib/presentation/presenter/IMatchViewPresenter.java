@@ -30,4 +30,6 @@ public interface IMatchViewPresenter extends IPresenter {
     public File getRecordingFile();
 
     public void stopRecording();
+
+    public void cleanUpMediaRecorder();
 }

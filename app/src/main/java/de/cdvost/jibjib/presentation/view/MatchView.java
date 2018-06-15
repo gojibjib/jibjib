@@ -30,6 +30,7 @@ import android.widget.ProgressBar;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -149,7 +150,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
         progressHandler.removeCallbacksAndMessages(null);
         birdanimation.stop();
         birdanimation.selectDrawable(0);
-//        textView.setText("Done");
     }
 
     @Override
@@ -184,9 +184,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
                 Log.i("TAG", "touched up");
                 btnMatch.setBackgroundResource(R.drawable.buttonshape_outline);
                 stopRecord();
-                startMatchAnimation();
-                //TODO: change background with matching animation
-                presenter.matchSound(this);
                 break;
         }
         return true;
@@ -216,16 +213,10 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
 
     @Override
     public void showProgress() {
-        //matchProgress.setVisibility(View.VISIBLE);
-
-//        Toast.makeText(this, "Matching sound", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void hideProgress() {
-        //matchBirds.setVisibility(View.VISIBLE);
-        //matchProgress.setVisibility(View.GONE);
-        //Toast.makeText(this, "Matching done", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -234,7 +225,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     }
 
     public void startRecord() {
-//        Toast.makeText(this, "Start Record", Toast.LENGTH_SHORT).show();
         if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)) {
             presenter.startRecording();
         } else {
@@ -243,8 +233,21 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     }
 
     public void stopRecord() {
-//        Toast.makeText(this, "Stop Record", Toast.LENGTH_SHORT).show();
-        presenter.stopRecording();
+        try {
+            presenter.stopRecording();
+            startMatchAnimation();
+            presenter.matchSound(this);
+        }
+        catch(Exception e){
+            //when the match button is just clicked and not held down
+            //this method can be invoked before the media player is all set up
+            //and recording.
+
+            //ignore exception and clean up
+        }
+        finally {
+            presenter.cleanUpMediaRecorder();
+        }
     }
 
     @Override
