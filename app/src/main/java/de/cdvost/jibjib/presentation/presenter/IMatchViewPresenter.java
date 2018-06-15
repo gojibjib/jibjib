@@ -25,10 +25,6 @@ public interface IMatchViewPresenter extends IPresenter {
 
     public void matchSound(Context context);
 
-    public void stopRecordingPlayback();
-
-    public void startStopRecordingPlayback();
-
     public void startRecording();
 
     public File getRecordingFile();

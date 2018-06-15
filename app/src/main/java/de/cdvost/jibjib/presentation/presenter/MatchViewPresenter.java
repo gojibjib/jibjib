@@ -85,48 +85,8 @@ public class MatchViewPresenter extends AbstractPresenter
         view.showError(message);
     }
 
-    public void stopRecordingPlayback() {
-        if (recordingMediaPlayer == null)
-            return;
-
-        try {
-            recordingMediaPlayer.stop();
-        } catch (IllegalStateException ie) {
-            Log.e("MatchViewPresenter", "could not stop recording playback");
-        }
-        recordingMediaPlayer.release();
-    }
-
-    public void startStopRecordingPlayback() {
-        stopRecordingPlayback();
-
-        File file = getRecordingFile();
-        if (!file.exists()) {
-            return;
-        }
-
-        recordingMediaPlayer = new MediaPlayer();
-        recordingMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            public void onCompletion(MediaPlayer mp) {
-            }
-        });
-
-        try {
-            // its important that we open the file stream ourselves and just
-            // hand over the file descriptor to the media player, otherwise
-            // the player wouldn't be able to read the file itself as we
-            // haven't created it with global permissions
-            FileInputStream inputstream = new FileInputStream(file);
-            recordingMediaPlayer.setDataSource(inputstream.getFD());
-            recordingMediaPlayer.prepare();
-        } catch (IOException io) {
-            Log.e("MatchViewPresenter", "Cannot load / prepare audio playback from " + file.getAbsolutePath());
-        }
-
-        recordingMediaPlayer.start();
-    }
-
     public void startRecording() {
+        isRecording = true;
 
         mediaRecorder = new MediaRecorder();
         mediaRecorder.reset();
@@ -176,6 +136,8 @@ public class MatchViewPresenter extends AbstractPresenter
     }
 
     public void stopRecording() {
+        isRecording = false;
+
         if (mediaRecorder == null)
             return;
         view.stopProgressBar();
