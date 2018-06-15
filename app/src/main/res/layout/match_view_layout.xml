@@ -24,29 +24,19 @@
         android:scaleType="centerCrop"
         android:src="@drawable/list"
         android:backgroundTint="#FFFF"
-        android:tint="#fd7455"
+        android:tint="@color/ciRed"
         android:paddingTop="30dp" />
 
-    <TextView
+    <ImageView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Birdcall audible?"
-        android:textSize="20dp"
+        android:src="@drawable/logo_w"
+        android:layout_width="1800dp"
+        android:layout_height="40dp"
         android:textColor="#b4b4b4"
+        android:layout_margin="25dp"
         android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:padding="30dp" />
+        android:layout_alignParentTop="true" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_match"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:background="#ffffff"
-        android:layout_below="@+id/textView"
-        android:layout_above="@+id/button"
-        android:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -68,18 +58,21 @@
             style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="10dp"
+            android:progressBackgroundTint="@color/ciLightBlue"
+            android:progressTint="@color/ciRed"
             android:max="80" />
 
         <Button
-
             android:id="@+id/button"
             android:layout_below="@+id/determinateBar"
             android:layout_margin="10dp"
             android:layout_width="110dp"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
-            android:textColor="#FFFD7455"
+            android:textColor="@color/ciRed"
             android:background="@drawable/buttonshape_outline"
 
             android:text="Match" />
@@ -89,8 +82,7 @@
         android:id="@+id/splash_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffff"
-        android:visibility="gone">
+        android:background="#ffff">
 
         <ImageView
             android:id="@+id/splash_screen_image"

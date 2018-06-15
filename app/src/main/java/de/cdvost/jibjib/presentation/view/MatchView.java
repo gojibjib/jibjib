@@ -1,7 +1,9 @@
 package de.cdvost.jibjib.presentation.view;
 
 import android.Manifest;
+import android.animation.LayoutTransition;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
@@ -17,6 +19,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -51,8 +55,6 @@ import de.cdvost.jibjib.threading.ThreadExecutor;
 
 public class MatchView extends Activity implements IMatchViewPresenter.View {
 
-    @BindView(R.id.textView)
-    TextView textView;
     @BindView(R.id.button)
     Button btnMatch;
     //@BindView(R.id.list_match)
@@ -80,6 +82,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     private AnimationDrawable splashAnimation;
     private String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     private final Handler progressHandler = new Handler();
+    private boolean needsSplashAnimation = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,21 +99,32 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
         splashScreenImage.setImageResource(R.drawable.splash_animation);
         splashAnimation = (AnimationDrawable) splashScreenImage.getDrawable();
 
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        /*splashScreen.getLayoutTransition()
+                .enableTransitionType(LayoutTransition.DISAPPEARING);*/
+        //splashScreen.getLayoutTransition().setDuration(3000);
         splashAnimation.start();
 
+
         final Runnable progress = () -> {
+            needsSplashAnimation = false;
+            AlphaAnimation animate = new AlphaAnimation(1.0f, 0.0f);
+            animate.setDuration(1000);
+            splashScreen.startAnimation(animate);
             splashScreen.setVisibility(View.GONE);
             splashAnimation.stop();
         };
 
         Handler splashHandler = new Handler();
-        splashHandler.postDelayed(progress, 3000);
+        if (needsSplashAnimation)
+            splashHandler.postDelayed(progress, 3000);
+
 
 
     }
@@ -140,6 +154,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     public void stopProgressBar() {
         progressHandler.removeCallbacksAndMessages(null);
         birdanimation.stop();
+        birdanimation.selectDrawable(0);
 //        textView.setText("Done");
     }
 
@@ -154,7 +169,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     @OnClick(R.id.birdlist)
     public void onClick() {
         Intent intent = new Intent(this, BirdListView.class);
-        startActivity(intent);
+        startActivity(intent,
+                ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     @OnTouch(R.id.button)
@@ -162,6 +178,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 Log.i("TAG", "touched down");
+                btnMatch.setBackgroundResource(R.drawable.buttonshape);
                 startRecord();
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -169,6 +186,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
                 break;
             case MotionEvent.ACTION_UP:
                 Log.i("TAG", "touched up");
+                btnMatch.setBackgroundResource(R.drawable.buttonshape_outline);
                 stopRecord();
 
                 //TODO: change background with matching animation

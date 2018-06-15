@@ -45,8 +45,8 @@ public class MatchResultView extends Activity implements IMatchResultPresenter.V
 
     //@BindView(R.id.list_match)
     RecyclerView matchBirds;
-    @BindView(R.id.birdlist)
-    ImageButton birdlist;
+    //@BindView(R.id.birdlist)
+    //ImageButton birdlist;
 
     private File audioFile;
     private IMatchResultPresenter presenter;
@@ -54,7 +54,7 @@ public class MatchResultView extends Activity implements IMatchResultPresenter.V
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.match_view_layout);
+        setContentView(R.layout.activity_matchresult);
         this.presenter = new MatchResultPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
 
@@ -86,11 +86,11 @@ public class MatchResultView extends Activity implements IMatchResultPresenter.V
         startActivity(intent);
     }
 
-    @OnClick(R.id.birdlist)
+    /*@OnClick(R.id.birdlist)
     public void onClick() {
         Intent intent = new Intent(this, BirdListView.class);
         startActivity(intent);
-    }
+    }*/
 
     @Override
     public void showProgress() {
