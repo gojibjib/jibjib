@@ -30,46 +30,40 @@
 
     <TextView
         android:id="@+id/URI"
-        android:text="URI"
-        android:maxLines="20"
-        android:textColor="@color/colorContentText"
-        android:textSize="15sp"
-        android:layout_marginLeft="40dp"
-        android:paddingTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/BirdName"
-        android:layout_gravity="top" />
-
-    <TextView
-        android:id="@+id/BirdSpecies"
-        android:text="Gattung"
-        android:maxLines="20"
-        android:textColor="@color/colorContentText"
-        android:textSize="15sp"
+        android:layout_gravity="top"
         android:layout_marginLeft="40dp"
+        android:autoLink="web"
+        android:maxLines="20"
         android:paddingTop="20dp"
+        android:text="URI"
+        android:textColor="@color/colorContentText"
+        android:textSize="15sp" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_below="@+id/URI" />
-
-    <TextView
-        android:id="@+id/BirdNutrition"
-        android:text="Ernährung"
-        android:maxLines="20"
-        android:textColor="@color/colorContentText"
-        android:textSize="15sp"
         android:layout_marginLeft="40dp"
-        android:paddingTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_below="@+id/BirdSpecies" />
+        android:paddingTop="20dp"
+        android:layout_below="@+id/URI"
+        android:layout_marginBottom="100dp"
+
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/BirdNutrition"
+            android:text="Description"
+            android:textColor="@color/colorContentText"
+            android:textSize="15sp"/>
+    </ScrollView>
 
     <Button
         android:id="@+id/savebird"
-        android:layout_margin="50dp"
+        android:layout_margin="20dp"
         android:layout_width="110dp"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"

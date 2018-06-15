@@ -28,8 +28,6 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
     TextView name;
     @BindView(R.id.URI)
     TextView uri;
-    @BindView(R.id.BirdSpecies)
-    TextView species;
     @BindView(R.id.BirdNutrition)
     TextView nutrition;
     @BindView(R.id.savebird)
@@ -49,7 +47,16 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
         ButterKnife.bind(this);
         this.bird = (MatchedBird) getIntent().getSerializableExtra(EXTRA_BIRD_KEY);
 
-        name.setText(bird.getBird().getTitle_de());
+        String title = bird.getBird().getTitle_de();
+        String genus = bird.getBird().getGenus();
+        String species = bird.getBird().getSpecies();
+        if(genus!=null && species!=null){
+            String link = "https://de.wikipedia.org/wiki/"+genus+"_"+species;
+            uri.setText(link);
+            title += " ("+genus+" "+species+")";
+        }
+        name.setText(title);
+        nutrition.setText(bird.getBird().getDescription_de());
     }
 
     @OnClick(R.id.savebird)
