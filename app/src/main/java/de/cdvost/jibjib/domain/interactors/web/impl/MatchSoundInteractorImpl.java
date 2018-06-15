@@ -42,7 +42,7 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
     }
 
 
-    private void executionFinished(List<MatchedBird> results){
+    private void executionFinished(ArrayList<MatchedBird> results){
         mainThread.post(()->callback.onMatchingFinished(results));
     }
 
@@ -52,7 +52,7 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
 
     @Override
     public void run() {
-        List<MatchedBird> birds = new ArrayList<>();
+        ArrayList<MatchedBird> birds = new ArrayList<>();
         String serviceResponse = matchBirdSound(audio);
         if(serviceResponse==null){
             executionFailed("No response from server");

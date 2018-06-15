@@ -3,6 +3,7 @@ package de.cdvost.jibjib.presentation.presenter;
 import android.content.Context;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
@@ -13,7 +14,7 @@ import de.cdvost.jibjib.repository.room.model.entity.Bird;
 
 public interface IMatchViewPresenter extends IPresenter {
     interface View extends BaseView {
-        public void showMatchResults(List<MatchedBird> results);
+        public void showMatchResults(ArrayList<MatchedBird> results);
 
         public File getFileStreamPath();
 

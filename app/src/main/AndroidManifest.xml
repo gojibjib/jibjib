@@ -24,6 +24,9 @@
         <activity
             android:name=".presentation.view.BirdListView"
             android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".presentation.view.MatchResultView"
+            android:screenOrientation="sensorPortrait" />
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 

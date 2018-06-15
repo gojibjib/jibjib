@@ -9,6 +9,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.cdvost.jibjib.domain.executor.Executor;
@@ -50,7 +51,7 @@ public class MatchViewPresenter extends AbstractPresenter
     }
 
     @Override
-    public void onMatchingFinished(List<MatchedBird> results) {
+    public void onMatchingFinished(ArrayList<MatchedBird> results) {
         view.hideProgress();
         view.showMatchResults(results);
     }

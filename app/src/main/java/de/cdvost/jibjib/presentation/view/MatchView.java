@@ -72,6 +72,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
 
     public ArrayList<BirdItemPresenter> matchedBirds = new ArrayList<>();
 
+    public static final String EXTRA_BIRD_LIST = "matchResultBirdList";
 
     private static final int REQUEST_CODE_PERMISSION_RECORD_AUDIO = 1;
     private IMatchViewPresenter presenter;
@@ -114,50 +115,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
 
     }
 
-    /*@Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.button) {
-            presenter.matchSound(this);
-        }
-    }*/
-    @Override
-    public void showMatchResults(List<MatchedBird> results) {
-
-
-        /*StringBuilder builder = new StringBuilder();
-        results.forEach(result->
-                builder.append(result.getPercentage())
-                        .append(": ")
-                        .append(result.getName())
-                        .append("\n"));
-        textView.setText(builder.toString());*/
-
-        for (MatchedBird result : results) {
-            matchedBirds.add(new BirdItemPresenter(result));
-        }
-
-        RecyclerView.LayoutManager blLayoutManager = new LinearLayoutManager(this);
-        matchBirds.setLayoutManager(blLayoutManager);
-        RecyclerView.Adapter blAdapter = new BirdListAdapter(this, matchedBirds);
-        matchBirds.setAdapter(blAdapter);
-
-
-        /*
-        List<String> matchResult = new ArrayList<String>();
-        for (MatchedBird result : results) {
-            matchResult.add(result.getBird().getName()+" "+result.getAccuracy());
-        }
-
-        ListAdapter birdListAdapter = new ArrayAdapter(
-                this,
-                R.layout.match_bird_item,
-                R.id.match_bird_text,
-                matchResult);
-
-        matchBirds.setAdapter(birdListAdapter);
-        matchBirds.setVisibility(View.VISIBLE);*/
-        textView.setText("MATCHES");
-    }
 
     @Override
     public File getFileStreamPath() {
@@ -167,7 +124,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     @Override
     public void updateProgressBar() {
         birdanimation.start();
-        textView.setText("recording");
+//        textView.setText("recording");
         mProgress.setProgress(0);
         final Runnable progress = () -> {
             //while(mProgress.get()<20 && isRecording){
@@ -183,18 +140,14 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     public void stopProgressBar() {
         progressHandler.removeCallbacksAndMessages(null);
         birdanimation.stop();
-        textView.setText("Done");
+//        textView.setText("Done");
     }
 
-
-    public void itemClick(BirdItemPresenter bird) {
-        //Toast.makeText(this, "on item click" + matchBirds.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, MatchBirdDetailView.class);
-        //TODO get ID
-        //int id = matchBirds.getItemAtPosition(position);
-        intent.putExtra("bird", bird);
-        //String id = matchBirds.getItemAtPosition(position).toString();
-        //intent.putExtra(Intent.EXTRA_TEXT, id);
+    @Override
+    public void showMatchResults(ArrayList<MatchedBird> results) {
+        //TODO: reset background
+        Intent intent = new Intent(this, MatchResultView.class);
+        intent.putExtra(EXTRA_BIRD_LIST, results);
         startActivity(intent);
     }
 
@@ -217,6 +170,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
             case MotionEvent.ACTION_UP:
                 Log.i("TAG", "touched up");
                 stopRecord();
+
+                //TODO: change background with matching animation
                 presenter.matchSound(this);
                 break;
         }
@@ -227,7 +182,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     public void showProgress() {
         //matchProgress.setVisibility(View.VISIBLE);
 
-        Toast.makeText(this, "Matching sound", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Matching sound", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -243,7 +198,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     }
 
     public void startRecord() {
-        Toast.makeText(this, "Start Record", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Start Record", Toast.LENGTH_SHORT).show();
         if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)) {
             presenter.startRecording();
         } else {
@@ -252,7 +207,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     }
 
     public void stopRecord() {
-        Toast.makeText(this, "Stop Record", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Stop Record", Toast.LENGTH_SHORT).show();
         presenter.stopRecording();
     }
 

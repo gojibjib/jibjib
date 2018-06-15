@@ -19,7 +19,7 @@ public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHo
     private List<String> nameValues;
     private List<String> accuracyValues;
     List<BirdItemPresenter> birdDataset;
-    MatchView mView;
+    MatchResultView mView;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -46,7 +46,7 @@ public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHo
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public BirdListAdapter(MatchView view, List<BirdItemPresenter> myDataset) {
+    public BirdListAdapter(MatchResultView view, List<BirdItemPresenter> myDataset) {
         mView = view;
         birdDataset = myDataset;
         nameValues = new ArrayList<>();

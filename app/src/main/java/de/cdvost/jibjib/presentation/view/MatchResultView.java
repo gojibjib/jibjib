@@ -29,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.cdvost.jibjib.R;
+import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
 import de.cdvost.jibjib.presentation.presenter.IMatchResultPresenter;
 import de.cdvost.jibjib.presentation.presenter.IMatchViewPresenter;
@@ -42,48 +43,32 @@ public class MatchResultView extends Activity implements IMatchResultPresenter.V
 
     public ArrayList<BirdItemPresenter> matchedBirds = new ArrayList<>();
 
-    @BindView(R.id.textView)
-    TextView textView;
-    @BindView(R.id.button)
-    Button btnMatch;
     //@BindView(R.id.list_match)
     RecyclerView matchBirds;
-    @BindView(R.id.progress)
-    ProgressBar matchProgress;
     @BindView(R.id.birdlist)
     ImageButton birdlist;
-    @BindView(R.id.bird_background)
-    ImageView birdbackground;
-    @BindView(R.id.determinateBar)
-    public ProgressBar mProgress;
-    @BindView(R.id.splash_screen)
-    public ViewGroup splashScreen;
-    @BindView(R.id.splash_screen_image)
-    public ImageView splashScreenImage;
 
-
-    private static final int REQUEST_CODE_PERMISSION_RECORD_AUDIO = 1;
+    private File audioFile;
     private IMatchResultPresenter presenter;
-    private AnimationDrawable birdanimation;
-    private AnimationDrawable splashAnimation;
-    private String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
-    private final Handler progressHandler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO: show loading animation until showResults() is invoked
         setContentView(R.layout.match_view_layout);
         this.presenter = new MatchResultPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
-        btnMatch.setOnClickListener(this);
+
+        //result list
+        ArrayList<MatchedBird> results = (ArrayList) getIntent().getSerializableExtra(MatchView.EXTRA_BIRD_LIST);
         matchBirds = (RecyclerView) findViewById(R.id.list_match);
+        for (MatchedBird result : results) {
+            matchedBirds.add(new BirdItemPresenter(result));
+        }
 
-        birdbackground.setImageResource(R.drawable.jibjib);
-        birdanimation = (AnimationDrawable) birdbackground.getDrawable();
-
-        splashScreenImage.setImageResource(R.drawable.splash_animation);
-        splashAnimation = (AnimationDrawable) splashScreenImage.getDrawable();
+        RecyclerView.LayoutManager blLayoutManager = new LinearLayoutManager(this);
+        matchBirds.setLayoutManager(blLayoutManager);
+        RecyclerView.Adapter blAdapter = new BirdListAdapter(this, matchedBirds);
+        matchBirds.setAdapter(blAdapter);
     }
 
     @Override
@@ -95,27 +80,8 @@ public class MatchResultView extends Activity implements IMatchResultPresenter.V
     public void onClick(View view) {
     }
 
-    @Override
-    public void showMatchResults(List<MatchedBird> results) {
-        //TODO: stop animation and show list of MatchedBirds
-
-        for (MatchedBird result : results) {
-            matchedBirds.add(new BirdItemPresenter(result));
-        }
-
-        RecyclerView.LayoutManager blLayoutManager = new LinearLayoutManager(this);
-        matchBirds.setLayoutManager(blLayoutManager);
-        RecyclerView.Adapter blAdapter = new BirdListAdapter(this, matchedBirds);
-        matchBirds.setAdapter(blAdapter);
-
-
-        textView.setText("MATCHES");
-    }
-
     public void itemClick(BirdItemPresenter bird) {
         Intent intent = new Intent(this, MatchBirdDetailView.class);
-        //TODO get ID
-        //int id = matchBirds.getItemAtPosition(position);
         intent.putExtra("bird", bird);
         startActivity(intent);
     }

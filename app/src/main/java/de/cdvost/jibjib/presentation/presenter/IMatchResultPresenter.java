@@ -11,6 +11,6 @@ import de.cdvost.jibjib.presentation.view.base.BaseView;
 
 public interface IMatchResultPresenter extends IPresenter {
     interface View extends BaseView {
-        public void showMatchResults(List<MatchedBird> results);
     }
+
 }

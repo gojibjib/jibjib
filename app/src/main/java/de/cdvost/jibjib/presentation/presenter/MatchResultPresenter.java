@@ -17,17 +17,12 @@ import de.cdvost.jibjib.domain.interactors.web.IMatchSoundInteractor;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
 import de.cdvost.jibjib.domain.interactors.web.impl.MatchSoundInteractorImpl;
 import de.cdvost.jibjib.presentation.presenter.base.AbstractPresenter;
+import de.cdvost.jibjib.presentation.view.MatchResultView;
 
 public class MatchResultPresenter extends AbstractPresenter
         implements IMatchResultPresenter {
 
     private View view;
-    private MediaPlayer recordingMediaPlayer = null;
-
-    private MediaRecorder mediaRecorder = null;
-    private static final int MAX_RECORDING_TIME = 20000;
-
-    private boolean isRecording = false;
 
     public MatchResultPresenter(Executor executor, MainThread mainThread, View view) {
         super(executor, mainThread);
@@ -58,4 +53,5 @@ public class MatchResultPresenter extends AbstractPresenter
     public void onError(String message) {
 
     }
+
 }
