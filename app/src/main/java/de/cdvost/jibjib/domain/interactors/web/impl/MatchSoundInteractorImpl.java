@@ -17,6 +17,7 @@ import de.cdvost.jibjib.domain.interactors.web.dto.MatchResult;
 import de.cdvost.jibjib.domain.interactors.web.dto.MatchedBird;
 import de.cdvost.jibjib.domain.interactors.web.parser.BirdDetailsParser;
 import de.cdvost.jibjib.domain.interactors.web.parser.MatchResponseParser;
+import de.cdvost.jibjib.repository.converter.WikiTextCleaner;
 import de.cdvost.jibjib.repository.room.RoomDataBaseRepository;
 import de.cdvost.jibjib.repository.room.model.entity.Bird;
 import de.cdvost.jibjib.repository.web.BirdWebServiceImpl;
@@ -72,6 +73,10 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
                     String response = new BirdWebServiceImpl().getMatchBird(result.getId());
                     bird = BirdDetailsParser.parse(response);
                     if (bird != null) {
+                        //clean Wiki description text
+                        bird.setDescription_de(WikiTextCleaner.cleanData(bird.getDescription_de()));
+                        bird.setDescription_en(WikiTextCleaner.cleanData(bird.getDescription_en()));
+
                         birds.add(new MatchedBird(bird, result.getAccuracy()));
                     }
                 }

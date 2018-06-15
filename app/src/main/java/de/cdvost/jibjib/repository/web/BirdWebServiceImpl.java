@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import de.cdvost.jibjib.repository.converter.WikiTextCleaner;
+
 public class BirdWebServiceImpl implements IBirdWebService {
     @Override
     public String match(Object audio) throws IOException{
