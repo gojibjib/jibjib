@@ -42,7 +42,7 @@ public class MatchBirdDetailPresenter extends AbstractPresenter implements IMatc
 
     @Override
     public void onError(String message) {
-
+        view.showError(message);
     }
 
     @Override

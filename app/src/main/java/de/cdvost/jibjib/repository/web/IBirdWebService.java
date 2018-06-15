@@ -1,5 +1,7 @@
 package de.cdvost.jibjib.repository.web;
 
+import java.io.IOException;
+
 public interface IBirdWebService {
 
     /**
@@ -9,7 +11,7 @@ public interface IBirdWebService {
      * @param audio the audio which should be mathcer
      * @return the response of the web service as a string
      */
-    public String match(Object audio);
+    public String match(Object audio) throws IOException;
 
-    public String getMatchBird(int id);
+    public String getMatchBird(int id) throws  IOException;
 }

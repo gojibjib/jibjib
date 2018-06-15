@@ -82,7 +82,7 @@ public class MatchViewPresenter extends AbstractPresenter
 
     @Override
     public void onError(String message) {
-
+        view.showError(message);
     }
 
     public void stopRecordingPlayback() {

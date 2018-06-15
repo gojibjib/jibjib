@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -37,11 +38,6 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
         this.context = context;
     }
 
-    private String matchBirdSound(Object audio) {
-        return new BirdWebServiceImpl().match(audio);
-    }
-
-
     private void executionFinished(ArrayList<MatchedBird> results){
         mainThread.post(()->callback.onMatchingFinished(results));
     }
@@ -52,34 +48,38 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
 
     @Override
     public void run() {
-        ArrayList<MatchedBird> birds = new ArrayList<>();
-        String serviceResponse = matchBirdSound(audio);
-        if(serviceResponse==null){
-            executionFailed("No response from server");
-            return;
-        }
-        List<MatchResult> matchResults = new ArrayList<>();
         try {
-            matchResults = MatchResponseParser.parse(serviceResponse);
-        } catch (JSONException e) {
-            executionFailed(e);
-            return;
-        }
-        //check if birds are already stored in the DB
-        RoomDataBaseRepository roomDataBaseRepository = new RoomDataBaseRepository();
-        for (MatchResult result : matchResults) {
-            Bird bird = roomDataBaseRepository.loadBirdById(result.getId(), context);
-            if(bird!=null){
-                birds.add(new MatchedBird(bird, result.getAccuracy()));
+            ArrayList<MatchedBird> birds = new ArrayList<>();
+            String serviceResponse = new BirdWebServiceImpl().match(audio);
+            if (serviceResponse == null) {
+                executionFailed("No response from server");
+                return;
             }
-            else{
-                String response = new BirdWebServiceImpl().getMatchBird(result.getId());
-                bird = BirdDetailsParser.parse(response);
-                if(bird!=null){
+            List<MatchResult> matchResults = new ArrayList<>();
+            try {
+                matchResults = MatchResponseParser.parse(serviceResponse);
+            } catch (JSONException e) {
+                executionFailed(e);
+                return;
+            }
+            //check if birds are already stored in the DB
+            RoomDataBaseRepository roomDataBaseRepository = new RoomDataBaseRepository();
+            for (MatchResult result : matchResults) {
+                Bird bird = roomDataBaseRepository.loadBirdById(result.getId(), context);
+                if (bird != null) {
                     birds.add(new MatchedBird(bird, result.getAccuracy()));
+                } else {
+                    String response = new BirdWebServiceImpl().getMatchBird(result.getId());
+                    bird = BirdDetailsParser.parse(response);
+                    if (bird != null) {
+                        birds.add(new MatchedBird(bird, result.getAccuracy()));
+                    }
                 }
             }
+            executionFinished(birds);
         }
-        executionFinished(birds);
+        catch (IOException e){
+            executionFailed(e);
+        }
     }
 }

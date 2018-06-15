@@ -51,7 +51,7 @@ public class MatchResultPresenter extends AbstractPresenter
 
     @Override
     public void onError(String message) {
-
+        view.showError(message);
     }
 
 }
