@@ -19,6 +19,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        android.buildTypes.each { type ->
+            type.buildConfigField 'String', 'Base_URL', WEBServiceBaseURL
+        }
     }
     compileOptions {
         targetCompatibility 1.8

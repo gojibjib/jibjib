@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import de.cdvost.jibjib.BuildConfig;
 import de.cdvost.jibjib.repository.converter.WikiTextCleaner;
 
 public class BirdWebServiceImpl implements IBirdWebService {
@@ -30,7 +31,7 @@ public class BirdWebServiceImpl implements IBirdWebService {
 
     private String requestBirdDetails(int id) throws IOException{
 
-        String uriString = "http://jibjib.api.f0rkd.net:8080/birds/"+id;
+        String uriString = BuildConfig.Base_URL+"/birds/"+id;
 
         URL url = new URL(uriString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -53,7 +54,7 @@ public class BirdWebServiceImpl implements IBirdWebService {
 
     public String requestDummy(Object audio) throws  IOException{
 
-        String uriString = "http://jibjib.api.f0rkd.net:8080/birds/dummy";
+        String uriString = BuildConfig.Base_URL+"/birds/dummy";
 
         URL url = new URL(uriString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -77,12 +78,11 @@ public class BirdWebServiceImpl implements IBirdWebService {
 
     public String requestMatch(Object audio) throws  IOException {
 
-        String uriString = "http://jibjib.api.f0rkd.net:8080/detect/binary";
+        String uriString = BuildConfig.Base_URL+"/detect/binary";
 
         URL url = new URL(uriString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
-        //conn.setRequestProperty("Accept", "application/octet-stream");
 
         conn.setDoOutput(true);
         DataOutputStream out = new DataOutputStream(conn.getOutputStream());
