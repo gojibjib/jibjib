@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_collection"
+        android:enabled="true"
+        android:icon="@drawable/round_storage_24"
+        android:title="Collection"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_record"
+        android:enabled="true"
+        android:icon="@drawable/round_mic_24"
+        android:title="Record"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_info"
+        android:enabled="true"
+        android:icon="@drawable/round_info_24"
+        android:title="Info"
+        app:showAsAction="ifRoom" />
+</menu>

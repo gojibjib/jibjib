@@ -5,20 +5,25 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.LayoutTransition;
 import android.animation.ObjectAnimator;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +32,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toolbar;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -43,7 +49,7 @@ import de.cdvost.jibjib.presentation.presenter.MatchViewPresenter;
 import de.cdvost.jibjib.threading.MainThreadImpl;
 import de.cdvost.jibjib.threading.ThreadExecutor;
 
-public class MatchView extends Activity implements IMatchViewPresenter.View {
+public class MatchView extends Activity implements IMatchViewPresenter.View, BottomNavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.button)
     Button btnMatch;
@@ -51,8 +57,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     RecyclerView matchBirds;
     @BindView(R.id.progress)
     ProgressBar matchProgress;
-    @BindView(R.id.birdlist)
-    ImageButton birdlist;
+    //@BindView(R.id.birdlist)
+    //ImageButton birdlist;
     @BindView(R.id.bird_background)
     ImageView birdbackground;
     @BindView(R.id.determinateBar)
@@ -61,6 +67,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     public ViewGroup splashScreen;
     @BindView(R.id.splash_screen_image)
     public ImageView splashScreenImage;
+    @BindView(R.id.bottom_navigation)
+    public BottomNavigationView bottomNavBar;
 
     @BindView(R.id.bird_background_empty)
     public ImageView backgroundEmpty;
@@ -87,6 +95,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
     private String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     private final Handler progressHandler = new Handler();
     private boolean needsSplashAnimation = true;
+    private Context context;
+    private Activity activity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,9 +106,38 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
         ButterKnife.bind(this);
         //btnMatch.setOnClickListener(this);
         matchBirds = (RecyclerView) findViewById(R.id.list_match);
+        context = this;
+        activity = this;
 
+        bottomNavBar.setSelectedItemId(R.id.nav_record);
         birdbackground.setImageResource(R.drawable.jibjib);
         birdanimation = (AnimationDrawable) birdbackground.getDrawable();
+        bottomNavBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_record:
+                        if (!(activity instanceof MatchView)) {
+                            startActivity(new Intent(context, MatchView.class), ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+                        }
+                        break;
+                    case R.id.nav_collection:
+                        if (!(activity instanceof BirdListView)) {
+                            Intent intent = new Intent(context, BirdListView.class);
+                            startActivity(intent,
+                                    ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+                        }
+                        break;
+                    case R.id.nav_info:
+                        if (!(activity instanceof InfoView)) {
+                            startActivity(new Intent(context, InfoView.class), ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+                        }
+                        break;
+                }
+
+                return true;
+            }
+        });
 
     }
 
@@ -159,6 +198,15 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
         birdanimation.selectDrawable(0);
     }
 
+    public int getContentViewId() {
+        return 0;
+    }
+
+
+    public int getNavigationMenuItemId() {
+        return 0;
+    }
+
     @Override
     public void showMatchResults(ArrayList<MatchedBird> results) {
         //TODO: reset background
@@ -168,12 +216,12 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
                 ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
-    @OnClick(R.id.birdlist)
+    /*@OnClick(R.id.birdlist)
     public void onClick() {
         Intent intent = new Intent(this, BirdListView.class);
         startActivity(intent,
                 ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-    }
+    }*/
 
     @OnTouch(R.id.button)
     public boolean onTouch(MotionEvent event) {
@@ -295,4 +343,27 @@ public class MatchView extends Activity implements IMatchViewPresenter.View {
         //backgroundEmpty.setVisibility(View.GONE);
 
     }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.e("matchView", "click info");
+        switch (item.getItemId()) {
+            case R.id.nav_record:
+                startActivity(new Intent(this, MatchView.class));
+                Log.e("matchView", "click record");
+                break;
+            case R.id.nav_collection:
+                startActivity(new Intent(this, BirdListView.class));
+                Log.e("matchView", "click collect");
+                break;
+            case R.id.nav_info:
+                Log.e("matchView", "click info");
+                //startActivity(new Intent(this, AccountsActivity.class));
+                break;
+        }
+        finish();
+        return true;
+    }
+
 }

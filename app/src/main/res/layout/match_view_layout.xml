@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:translationY="-40dp"
         android:src="@drawable/matching_animatio_start"
         android:visibility="gone" />
 
@@ -22,9 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:translationY="-40dp"
         android:src="@drawable/birds_online" />
 
-    <ImageButton
+    <!--<ImageButton
         android:id="@+id/birdlist"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -32,7 +34,7 @@
         android:src="@drawable/list"
         android:backgroundTint="#FFFF"
         android:tint="@color/ciRed"
-        android:paddingTop="30dp" />
+        android:paddingTop="30dp" /> -->
 
     <ImageView
         android:id="@+id/textView"
@@ -49,6 +51,7 @@
         android:id="@+id/clouds"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:translationY="-40dp"
         android:visibility="gone">
 
 
@@ -79,7 +82,7 @@
 
         <ImageView
             android:id="@+id/cloud4"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="92dp"
             android:src="@drawable/animation_cloud3"
             android:layout_width="500dp"
             android:layout_marginLeft="100dp"
@@ -100,6 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:translationY="-50dp"
         android:layout_margin="20dp">
 
         <ProgressBar
@@ -126,11 +130,30 @@
             android:text="Match" />
     </RelativeLayout>
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:elevation="2dp"
+        app:itemIconTint="@color/colorPrimary"
+        app:itemTextColor="@color/colorPrimary"
+        app:menu="@menu/bottom_nav_menu" />
+
+    <View
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:background="@drawable/buttonshape"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:elevation="4dp" />
+
     <LinearLayout
         android:id="@+id/splash_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffff">
+        android:background="#ffff"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/splash_screen_image"

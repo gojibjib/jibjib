@@ -2,11 +2,16 @@ package de.cdvost.jibjib.presentation.view;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
@@ -36,8 +41,12 @@ public class BirdListView extends Activity implements IBirdListViewPresenter.Vie
     TextView birdlist;
     @BindView(R.id.list_saved_birds)
     RecyclerView savedBirds;
+    @BindView(R.id.bottom_navigation)
+    public BottomNavigationView bottomNavBar;
 
     private IBirdListViewPresenter presenter;
+    private Context context;
+    private Activity activity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +55,36 @@ public class BirdListView extends Activity implements IBirdListViewPresenter.Vie
         this.presenter = new BirdListViewPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
         presenter.getBirdList(this);
+        context = this;
+        activity = this;
+
+        bottomNavBar.setSelectedItemId(R.id.nav_collection);
+        bottomNavBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_record:
+                        if (!(activity instanceof MatchView)) {
+                            startActivity(new Intent(context, MatchView.class), ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+                        }
+                        break;
+                    case R.id.nav_collection:
+                        if (!(activity instanceof BirdListView)) {
+                            Intent intent = new Intent(context, BirdListView.class);
+                            startActivity(intent,
+                                    ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+                        }
+                        break;
+                    case R.id.nav_info:
+                        if (!(activity instanceof InfoView)) {
+                            startActivity(new Intent(context, InfoView.class), ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+                        }
+                        break;
+                }
+
+                return true;
+            }
+        });
 
     }
 

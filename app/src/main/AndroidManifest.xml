@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.cdvost.jibjib">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
         android:allowBackup="true"
@@ -9,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/jibjib_logo_square_r"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar.Fullscreen">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".presentation.view.MatchView"
             android:screenOrientation="sensorPortrait">
@@ -20,14 +21,17 @@
         </activity>
         <activity
             android:name=".presentation.view.MatchBirdDetailView"
-            android:screenOrientation="sensorPortrait"></activity>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".presentation.view.BirdListView"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".presentation.view.InfoView"
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".presentation.view.MatchResultView"
             android:screenOrientation="sensorPortrait" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
 
 </manifest>
