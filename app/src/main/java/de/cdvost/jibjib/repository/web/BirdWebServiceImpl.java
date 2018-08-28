@@ -15,6 +15,9 @@ import de.cdvost.jibjib.BuildConfig;
 import de.cdvost.jibjib.repository.converter.WikiTextCleaner;
 
 public class BirdWebServiceImpl implements IBirdWebService {
+
+    private static final int TIMEOUT = 3000;
+
     @Override
     public String match(Object audio) throws IOException{
         String response = requestMatch(audio);
@@ -59,6 +62,8 @@ public class BirdWebServiceImpl implements IBirdWebService {
         URL url = new URL(uriString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
+        conn.setConnectTimeout(TIMEOUT);
+        conn.setReadTimeout(TIMEOUT);
         //conn.setRequestProperty("Accept", "application/json");
 
         if (conn.getResponseCode() != 200) {
@@ -83,6 +88,8 @@ public class BirdWebServiceImpl implements IBirdWebService {
         URL url = new URL(uriString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
+        conn.setConnectTimeout(TIMEOUT);
+        conn.setReadTimeout(TIMEOUT);
 
         conn.setDoOutput(true);
         DataOutputStream out = new DataOutputStream(conn.getOutputStream());
