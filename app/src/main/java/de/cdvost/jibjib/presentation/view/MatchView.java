@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import java.io.File;
@@ -285,7 +286,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
 
     @Override
     public void showError(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG);
     }
 
     public void startRecord() {

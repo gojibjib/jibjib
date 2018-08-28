@@ -83,7 +83,7 @@ public class MatchResultView extends Activity implements IMatchResultPresenter.V
 
     @Override
     public void showError(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG);
     }
 
 }

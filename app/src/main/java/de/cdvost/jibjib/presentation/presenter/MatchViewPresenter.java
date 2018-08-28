@@ -58,6 +58,7 @@ public class MatchViewPresenter extends AbstractPresenter
     @Override
     public void onExecutionFailed(Object fail) {
         view.hideProgress();
+        view.showError(fail.toString());
     }
 
     @Override

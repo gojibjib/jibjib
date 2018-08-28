@@ -35,6 +35,6 @@ public class InfoViewPresenter extends AbstractPresenter implements IInfoViewPre
 
     @Override
     public void onError(String message) {
-
+        view.showError(message);
     }
 }
