@@ -19,20 +19,20 @@ public class BirdWebServiceImpl implements IBirdWebService {
     private static final int TIMEOUT = 3000;
 
     @Override
-    public String match(Object audio) throws IOException{
+    public String match(Object audio) throws Exception{
         String response = requestMatch(audio);
 //        String response = requestDummy(audio);
         return response;
     }
 
     @Override
-    public String getMatchBird(int id) throws  IOException{
+    public String getMatchBird(int id) throws  Exception{
         String response = requestBirdDetails(id);
         return response;
 
     }
 
-    private String requestBirdDetails(int id) throws IOException{
+    private String requestBirdDetails(int id) throws Exception{
 
         String uriString = BuildConfig.Base_URL+"/birds/"+id;
 
@@ -81,9 +81,9 @@ public class BirdWebServiceImpl implements IBirdWebService {
 
     }
 
-    public String requestMatch(Object audio) throws  IOException {
+    public String requestMatch(Object audio) throws Exception {
 
-        String uriString = BuildConfig.Base_URL+"/detect/binary";
+        String uriString = BuildConfig.Base_URL+"/detect/binaryo";
 
         URL url = new URL(uriString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
