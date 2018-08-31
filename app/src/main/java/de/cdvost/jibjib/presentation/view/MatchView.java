@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import java.io.File;
@@ -284,7 +285,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
 
     @Override
     public void showError(String message) {
-
+        stopMatchAnimation();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     public void startRecord() {
@@ -327,6 +329,14 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
     @Override
     public void onPause(){
         super.onPause();
+        stopMatchAnimation();
+
+        // backgroundEmpty.startAnimation(animate);
+        //backgroundEmpty.setVisibility(View.GONE);
+
+    }
+
+    private void stopMatchAnimation() {
         AlphaAnimation animate = new AlphaAnimation(1.0f, 0.0f);
         animate.setDuration(1000);
         clouds.startAnimation(animate);
@@ -338,9 +348,9 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
             movecloud4.cancel();
         }
 
-        // backgroundEmpty.startAnimation(animate);
-        //backgroundEmpty.setVisibility(View.GONE);
 
+        birdbackground.startAnimation(animate);
+        birdbackground.setVisibility(View.VISIBLE);
     }
 
 

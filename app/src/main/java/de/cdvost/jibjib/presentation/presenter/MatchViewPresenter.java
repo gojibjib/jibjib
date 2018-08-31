@@ -58,6 +58,11 @@ public class MatchViewPresenter extends AbstractPresenter
     @Override
     public void onExecutionFailed(Object fail) {
         view.hideProgress();
+        String errorMessage = fail.toString();
+        if(fail instanceof  Exception){
+            errorMessage = ((Exception) fail).getMessage();
+        }
+        view.showError(errorMessage);
     }
 
     @Override

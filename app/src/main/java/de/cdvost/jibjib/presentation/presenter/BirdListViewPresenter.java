@@ -60,6 +60,6 @@ public class BirdListViewPresenter extends AbstractPresenter implements IBirdLis
 
     @Override
     public void onError(String message) {
-
+        view.showError(message);
     }
 }

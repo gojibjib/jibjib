@@ -92,7 +92,7 @@ public class MatchBirdDetailView extends Activity implements IMatchBirdDetailPre
 
     @Override
     public void showError(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
 

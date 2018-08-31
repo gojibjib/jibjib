@@ -1,35 +1,40 @@
 package de.cdvost.jibjib.repository.web;
 
+import android.util.Pair;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import de.cdvost.jibjib.BuildConfig;
-import de.cdvost.jibjib.repository.converter.WikiTextCleaner;
+import de.cdvost.jibjib.domain.interactors.web.parser.ErrorResponseParser;
 
 public class BirdWebServiceImpl implements IBirdWebService {
+
+    private static final int TIMEOUT = 3000;
+
     @Override
-    public String match(Object audio) throws IOException{
+    public String match(Object audio) throws Exception{
         String response = requestMatch(audio);
 //        String response = requestDummy(audio);
         return response;
     }
 
     @Override
-    public String getMatchBird(int id) throws  IOException{
+    public String getMatchBird(int id) throws  Exception{
         String response = requestBirdDetails(id);
         return response;
 
     }
 
-    private String requestBirdDetails(int id) throws IOException{
+    private String requestBirdDetails(int id) throws Exception{
 
         String uriString = BuildConfig.Base_URL+"/birds/"+id;
 
@@ -37,9 +42,8 @@ public class BirdWebServiceImpl implements IBirdWebService {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
-        if (conn.getResponseCode() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-        }
+        checkConnection(conn);
+
         BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
 
         StringBuilder builder = new StringBuilder();
@@ -52,18 +56,19 @@ public class BirdWebServiceImpl implements IBirdWebService {
 
     }
 
-    public String requestDummy(Object audio) throws  IOException{
+    public String requestDummy(Object audio) throws Exception{
 
         String uriString = BuildConfig.Base_URL+"/birds/dummy";
 
         URL url = new URL(uriString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
+        conn.setConnectTimeout(TIMEOUT);
+        conn.setReadTimeout(TIMEOUT);
         //conn.setRequestProperty("Accept", "application/json");
 
-        if (conn.getResponseCode() != 200) {
-            throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-        }
+        checkConnection(conn);
+
         BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
 
         StringBuilder builder = new StringBuilder();
@@ -76,13 +81,15 @@ public class BirdWebServiceImpl implements IBirdWebService {
 
     }
 
-    public String requestMatch(Object audio) throws  IOException {
+    public String requestMatch(Object audio) throws Exception {
 
-        String uriString = BuildConfig.Base_URL+"/detect/binary";
+        String uriString = BuildConfig.Base_URL+"/detect/binaryo";
 
         URL url = new URL(uriString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
+        conn.setConnectTimeout(TIMEOUT);
+        conn.setReadTimeout(TIMEOUT);
 
         conn.setDoOutput(true);
         DataOutputStream out = new DataOutputStream(conn.getOutputStream());
@@ -97,9 +104,8 @@ public class BirdWebServiceImpl implements IBirdWebService {
         out.flush();
         out.close();
 
-        if (conn.getResponseCode() != 200 && conn.getResponseCode()!= 202) {
-            throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-        }
+        checkConnection(conn);
+
         BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
 
         StringBuilder builder = new StringBuilder();
@@ -109,5 +115,25 @@ public class BirdWebServiceImpl implements IBirdWebService {
         }
         conn.disconnect();
         return builder.toString();
+    }
+
+    private void checkConnection(HttpURLConnection conn) throws Exception {
+        if (conn.getResponseCode() != 200 && conn.getResponseCode()!= 202) {
+            InputStream errorStream = conn.getErrorStream();
+            String message = "";
+            if(errorStream!=null){
+                BufferedReader br = new BufferedReader(new InputStreamReader((errorStream)));
+                String line;
+                StringBuilder builder = new StringBuilder();
+                while ((line = br.readLine()) != null) {
+                    builder.append(line);
+                }
+                Pair<String, String> pair = ErrorResponseParser.parse(builder.toString());
+                message = pair.second;
+            }
+            throw new RuntimeException("Webrequest failed\n" +
+                    "HTTP error code : " + conn.getResponseCode() + "\n" +
+                    "Message: "+message);
+        }
     }
 }

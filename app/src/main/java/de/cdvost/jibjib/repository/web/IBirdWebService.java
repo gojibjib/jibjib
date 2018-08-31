@@ -11,7 +11,7 @@ public interface IBirdWebService {
      * @param audio the audio which should be mathcer
      * @return the response of the web service as a string
      */
-    public String match(Object audio) throws IOException;
+    public String match(Object audio) throws Exception;
 
-    public String getMatchBird(int id) throws  IOException;
+    public String getMatchBird(int id) throws Exception;
 }

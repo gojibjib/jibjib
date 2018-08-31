@@ -83,7 +83,7 @@ public class MatchSoundInteractorImpl extends AbstractInteractor implements IMat
             }
             executionFinished(birds);
         }
-        catch (IOException e){
+        catch (Exception e){
             executionFailed(e);
         }
     }
