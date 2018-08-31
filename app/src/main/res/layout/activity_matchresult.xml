@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffff">
 
     <ImageView
@@ -9,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/background_wave_h"
-        android:translationY="-75dp">
+        android:translationY="-115dp">
 
     </ImageView>
 
@@ -19,19 +20,31 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:paddingTop="40dp"
-        android:paddingLeft="40dp"
+        android:paddingStart="40dp"
         android:text="MATCHED BIRDS"
         android:textColor="@color/ciRed"
         android:textSize="20sp"
         android:textStyle="normal" />
 
+
+    <com.github.mikephil.charting.charts.PieChart
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/pieChart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:translationY="-80dp"
+        android:contentDescription="" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_match"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:paddingTop="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="12dp"
         android:visibility="visible" />
 
 </android.support.constraint.ConstraintLayout>

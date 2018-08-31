@@ -60,7 +60,7 @@ public class SavedBirdListAdapter extends RecyclerView.Adapter<SavedBirdListAdap
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
         View v =
-                inflater.inflate(R.layout.match_bird_item, parent, false);
+                inflater.inflate(R.layout.saved_bird_item, parent, false);
         SavedBirdListAdapter.ViewHolder vh = new ViewHolder(v);
         return vh;
     }

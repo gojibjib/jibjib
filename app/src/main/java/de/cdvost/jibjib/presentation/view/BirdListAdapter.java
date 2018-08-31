@@ -1,5 +1,6 @@
 package de.cdvost.jibjib.presentation.view;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +30,8 @@ public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHo
             super(v);
             layout = v;
             birdName = (TextView) v.findViewById(R.id.match_bird_name);
-            birdAccuracy = (TextView) v.findViewById(R.id.match_bird_accuracy);
-            birdAccuracy.setVisibility(View.VISIBLE);
+            //birdAccuracy = (TextView) v.findViewById(R.id.match_bird_accuracy);
+            //birdAccuracy.setVisibility(View.VISIBLE);
         }
     }
 
@@ -51,8 +52,10 @@ public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHo
         nameValues = new ArrayList<>();
         accuracyValues = new ArrayList<>();
         for (MatchedBird bird : myDataset) {
-            nameValues.add(bird.getBird().getTitle_de() + "\n" + "(" + bird.getBird().getName() + ")");
-            accuracyValues.add(Float.toString(bird.getAccuracy()));
+            if (bird.getAccuracy() * 100 > 0.5) {
+                nameValues.add(bird.getBird().getTitle_de() /*+ "\n"*/ + "  (" + bird.getBird().getName() + ")");
+                accuracyValues.add(Float.toString(bird.getAccuracy()));
+            }
         }
     }
 
@@ -72,8 +75,20 @@ public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHo
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         final String name = nameValues.get(position);
-        final String accuracy = accuracyValues.get(position);
+        //final String accuracy = accuracyValues.get(position);
         holder.birdName.setText(name);
+        switch (position) {
+            case 0:
+                holder.birdName.setTextColor(mView.getResources().getColor(R.color.ciRed));
+                break;
+            case 1:
+                holder.birdName.setTextColor(mView.getResources().getColor(R.color.ciDarkBlue));
+                break;
+            case 2:
+                holder.birdName.setTextColor(mView.getResources().getColor(R.color.ciMidBlue));
+                break;
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +96,7 @@ public class BirdListAdapter extends RecyclerView.Adapter<BirdListAdapter.ViewHo
             }
         });
 
-        holder.birdAccuracy.setText(accuracy);
+        //holder.birdAccuracy.setText(accuracy);
     }
 
     @Override

@@ -43,4 +43,5 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }

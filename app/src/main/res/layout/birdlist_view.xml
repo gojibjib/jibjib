@@ -22,6 +22,7 @@
         android:paddingTop="40dp"
         android:paddingLeft="40dp"
         android:text="YOUR COLLECTION"
+
         android:textColor="@color/ciRed"
         android:textSize="20sp"
         android:textStyle="normal" />

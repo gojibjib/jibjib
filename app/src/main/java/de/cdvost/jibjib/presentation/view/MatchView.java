@@ -105,7 +105,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
         this.presenter = new MatchViewPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
         //btnMatch.setOnClickListener(this);
-        matchBirds = (RecyclerView) findViewById(R.id.list_match);
         context = this;
         activity = this;
 
