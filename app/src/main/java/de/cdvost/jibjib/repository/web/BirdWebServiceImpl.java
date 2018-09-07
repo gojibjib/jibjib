@@ -83,7 +83,7 @@ public class BirdWebServiceImpl implements IBirdWebService {
 
     public String requestMatch(Object audio) throws Exception {
 
-        String uriString = BuildConfig.Base_URL+"/detect/binaryo";
+        String uriString = BuildConfig.Base_URL+"/detect/binary";
 
         URL url = new URL(uriString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
