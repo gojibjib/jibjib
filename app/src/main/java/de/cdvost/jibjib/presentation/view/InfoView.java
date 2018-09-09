@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +34,8 @@ public class InfoView extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_view);
+        ((TextView) findViewById(R.id.info_TextView)).setMovementMethod(LinkMovementMethod.getInstance());
+        ((TextView) findViewById(R.id.info_TextView)).setText(Html.fromHtml(getResources().getString(R.string.app_info)));
         this.presenter = new InfoViewPresenter(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this);
         ButterKnife.bind(this);
         context = this;

@@ -1,3 +1,58 @@
 <resources>
     <string name="app_name">jibjib</string>
+    <string name="app_info">
+    Thank you for using our app! This very much a work in progress, if you find any bugs, have suggestions or would like to improve this app, please do so via Github:
+&lt;br>
+&lt;br>
+https://github.com/gojibjib
+&lt;br>
+&lt;br>
+&lt;h1>Data Sources&lt;/h1>
+&lt;br>
+&lt;br>
+&lt;a href="https://ai.google/research/pubs/pub45611">Google Research: CNN Architectures for Large-Scale Audio Classification&lt;/a>
+&lt;br>
+&lt;br>
+
+&lt;a href="http://www.tierstimmenarchiv.de/">tierstimmenarchiv.de&lt;/a>
+&lt;br>
+&lt;br>
+
+&lt;a href="https://www.xeno-canto.org">Xeno-canto.org&lt;/a>
+&lt;br>
+&lt;br>
+
+&lt;a href="https://www.wikipedia.org/">Wikipedia&lt;/a>
+&lt;br>
+&lt;br>
+
+&lt;h1>Special Thanks&lt;/h1>
+&lt;br>
+&lt;br>
+We would also like to thank the following institutions for making this project possible:
+&lt;br>
+&lt;br>
+
+&lt;a href="https://www.museumfuernaturkunde.berlin/en">Museum für Naturkunde Berlin&lt;/a>
+&lt;br>
+&lt;br>
+
+&lt;a href="https://codingdavinci.de">The Coding Davinci OST Hackathon Team&lt;/a>
+&lt;br>
+&lt;br>
+
+&lt;a href="https://www.tu-chemnitz.de/informatik">Chemnitz University of Technology&lt;/a>
+&lt;br>
+&lt;br>
+&lt;h1>Privacy Disclaimer&lt;/h1>
+&lt;br>
+&lt;br>
+No personal information is collected, processed or shared when using this app.
+&lt;br>
+&lt;br>
+&lt;h1>License&lt;/h1>
+&lt;br>
+&lt;br>
+This app and all its assets are licensed under GPLv3
+    </string>
 </resources>
