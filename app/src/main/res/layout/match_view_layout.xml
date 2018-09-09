@@ -148,21 +148,6 @@
         android:layout_centerInParent="true"
         android:elevation="4dp" />
 
-    <LinearLayout
-        android:id="@+id/splash_screen"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffff"
-        android:elevation="10dp">
-
-        <ImageView
-            android:id="@+id/splash_screen_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/splash_start"
-            android:layout_margin="70dp" />
-    </LinearLayout>
-
 
 </RelativeLayout>
 

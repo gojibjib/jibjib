@@ -13,6 +13,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".presentation.view.MatchView"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".presentation.view.SplashScreen"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

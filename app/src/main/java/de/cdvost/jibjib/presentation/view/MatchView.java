@@ -58,10 +58,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
     ImageView birdbackground;
     @BindView(R.id.determinateBar)
     public ProgressBar mProgress;
-    @BindView(R.id.splash_screen)
-    public ViewGroup splashScreen;
-    @BindView(R.id.splash_screen_image)
-    public ImageView splashScreenImage;
     @BindView(R.id.bottom_navigation)
     public BottomNavigationView bottomNavBar;
 
@@ -86,10 +82,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
     private static final int REQUEST_CODE_PERMISSION_RECORD_AUDIO = 1;
     private IMatchViewPresenter presenter;
     private AnimationDrawable birdanimation;
-    private AnimationDrawable splashAnimation;
     private String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     private final Handler progressHandler = new Handler();
-    private boolean needsSplashAnimation = true;
     private Context context;
     private Activity activity;
 
@@ -132,35 +126,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
                 return true;
             }
         });
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        splashScreenImage.setImageResource(R.drawable.splash_animation);
-        splashAnimation = (AnimationDrawable) splashScreenImage.getDrawable();
-        /*splashScreen.getLayoutTransition()
-                .enableTransitionType(LayoutTransition.DISAPPEARING);*/
-        //splashScreen.getLayoutTransition().setDuration(3000);
-        splashAnimation.start();
-
-
-        final Runnable progress = () -> {
-            needsSplashAnimation = false;
-            AlphaAnimation animate = new AlphaAnimation(1.0f, 0.0f);
-            animate.setDuration(1000);
-            splashScreen.startAnimation(animate);
-            splashScreen.setVisibility(View.GONE);
-            splashAnimation.stop();
-        };
-
-        Handler splashHandler = new Handler();
-        if (needsSplashAnimation)
-            splashHandler.postDelayed(progress, 3000);
-
-
 
     }
 
