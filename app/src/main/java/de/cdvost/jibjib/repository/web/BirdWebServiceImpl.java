@@ -132,8 +132,7 @@ public class BirdWebServiceImpl implements IBirdWebService {
                 message = pair.second;
             }
             throw new RuntimeException("Webrequest failed\n" +
-                    "HTTP error code : " + conn.getResponseCode() + "\n" +
-                    "Message: "+message);
+                    "HTTP error code : " + conn.getResponseCode() + "\n");
         }
     }
 }
