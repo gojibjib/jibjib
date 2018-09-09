@@ -246,6 +246,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
     public void showError(String message) {
         stopMatchAnimation();
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        birdbackground.setVisibility(View.VISIBLE);
     }
 
     public void startRecord() {
@@ -300,9 +301,6 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
         super.onPause();
         stopMatchAnimation();
 
-        // backgroundEmpty.startAnimation(animate);
-        //backgroundEmpty.setVisibility(View.GONE);
-
     }
 
     private void stopMatchAnimation() {
@@ -318,8 +316,8 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
         }
 
 
-        birdbackground.startAnimation(animate);
-        birdbackground.setVisibility(View.VISIBLE);
+        //birdbackground.startAnimation(animate);
+        //birdbackground.setVisibility(View.VISIBLE);
     }
 
 
