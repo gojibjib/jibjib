@@ -131,8 +131,8 @@ public class BirdWebServiceImpl implements IBirdWebService {
 //                Pair<String, String> pair = ErrorResponseParser.parse(builder.toString());
 //                message = pair.second;
 //            }
-            throw new RuntimeException("Webrequest failed\n" +
-                    "HTTP error code : " + responseCode + "\n");
+            throw new RuntimeException("Oops, something went wrong!\n" +
+                    "Please try again.");
         }
     }
 }
