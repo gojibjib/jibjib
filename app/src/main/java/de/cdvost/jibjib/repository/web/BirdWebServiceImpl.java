@@ -65,7 +65,6 @@ public class BirdWebServiceImpl implements IBirdWebService {
         conn.setRequestMethod("GET");
         conn.setConnectTimeout(TIMEOUT);
         conn.setReadTimeout(TIMEOUT);
-        //conn.setRequestProperty("Accept", "application/json");
 
         checkConnection(conn);
 
@@ -118,21 +117,22 @@ public class BirdWebServiceImpl implements IBirdWebService {
     }
 
     private void checkConnection(HttpURLConnection conn) throws Exception {
-        if (conn.getResponseCode() != 200 && conn.getResponseCode()!= 202) {
-            InputStream errorStream = conn.getErrorStream();
-            String message = "";
-            if(errorStream!=null){
-                BufferedReader br = new BufferedReader(new InputStreamReader((errorStream)));
-                String line;
-                StringBuilder builder = new StringBuilder();
-                while ((line = br.readLine()) != null) {
-                    builder.append(line);
-                }
-                Pair<String, String> pair = ErrorResponseParser.parse(builder.toString());
-                message = pair.second;
-            }
+        int responseCode = conn.getResponseCode();
+        if (responseCode != 200 && responseCode != 202) {
+//            InputStream errorStream = conn.getErrorStream();
+//            String message = "";
+//            if(errorStream!=null){
+//                BufferedReader br = new BufferedReader(new InputStreamReader((errorStream)));
+//                String line;
+//                StringBuilder builder = new StringBuilder();
+//                while ((line = br.readLine()) != null) {
+//                    builder.append(line);
+//                }
+//                Pair<String, String> pair = ErrorResponseParser.parse(builder.toString());
+//                message = pair.second;
+//            }
             throw new RuntimeException("Webrequest failed\n" +
-                    "HTTP error code : " + conn.getResponseCode() + "\n");
+                    "HTTP error code : " + responseCode + "\n");
         }
     }
 }
