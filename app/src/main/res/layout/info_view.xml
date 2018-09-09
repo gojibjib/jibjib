@@ -34,15 +34,28 @@
         app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/info_TextView"
-        android:layout_width="334dp"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="358dp"
         android:linksClickable="true"
-        android:text="@string/app_info"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/bird_background"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bird_background"
-        tools:layout_editor_absoluteY="100dp" />
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="30dp"
+        android:layout_gravity="top"
+        android:paddingTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="100dp">
+
+        <TextView
+            android:id="@+id/info_TextView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/app_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="100dp" />
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
