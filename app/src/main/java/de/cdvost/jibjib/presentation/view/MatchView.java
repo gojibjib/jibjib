@@ -173,7 +173,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
 
     @Override
     public File getFileStreamPath() {
-        return this.getFileStreamPath("recording_" + RandomAudioFileName + ".3gp");
+        return this.getFileStreamPath("recording_" + RandomAudioFileName + ".mp4");
     }
 
     @Override
