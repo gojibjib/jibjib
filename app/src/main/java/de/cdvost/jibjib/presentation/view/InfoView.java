@@ -48,23 +48,24 @@ public class InfoView extends Activity {
                 switch (item.getItemId()) {
                     case R.id.nav_record:
                         if (!(activity instanceof MatchView)) {
-                            startActivity(new Intent(context, MatchView.class), ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+                            startActivity(new Intent(context, MatchView.class));
+                            finish();
                         }
                         break;
                     case R.id.nav_collection:
                         if (!(activity instanceof BirdListView)) {
                             Intent intent = new Intent(context, BirdListView.class);
-                            startActivity(intent,
-                                    ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+                            startActivity(intent);
+                            finish();
                         }
                         break;
                     case R.id.nav_info:
                         if (!(activity instanceof InfoView)) {
-                            startActivity(new Intent(context, InfoView.class), ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
+                            startActivity(new Intent(context, InfoView.class));
+                            finish();
                         }
                         break;
                 }
-
                 return true;
             }
         });

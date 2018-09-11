@@ -55,6 +55,10 @@ public class SplashScreen extends Activity {
         Handler splashHandler = new Handler();
         splashHandler.postDelayed(progress, 3000);
 
+        final Runnable finish = this::finish;
+
+        Handler finishHandler = new Handler();
+        finishHandler.postDelayed(finish, 3100);
 
     }
 }
