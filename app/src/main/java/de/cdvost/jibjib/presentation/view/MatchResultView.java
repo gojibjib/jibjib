@@ -62,7 +62,7 @@ public class MatchResultView extends Activity implements IMatchResultPresenter.V
         matchBirds = (RecyclerView) findViewById(R.id.list_match);
         resultChart.setUsePercentValues(true);
 
-        ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+        ArrayList<PieEntry> entries = new ArrayList<>();
         for (MatchedBird bird : matchedBirds) {
             if (bird.getAccuracy() * 100 > 0.5)
                 entries.add(new PieEntry(bird.getAccuracy() * 100, bird.getBird().getTitle_de()));
