@@ -1,6 +1,17 @@
 
 ![alt JibJib](/app/src/main/res/drawable/splash_start.png)
 
+# Repo layout
+This is the repo for the JibJib Android app.
+
+The complete list of JibJib repos is:
+
+- [jibjib](https://github.com/gojibjib/jibjib): Our Android app. Records sounds and looks fantastic.
+- [deploy](https://github.com/gojibjib/deploy): Instructions to deploy the JibJib stack.
+- [jibjib-api](https://github.com/gojibjib/jibjib-api): Main API to receive requests & audio files to pass it on for inference.
+- [jibjib-data](https://github.com/gojibjib/jibjib-data): A MongoDB instance holding information about detectable birds.
+- [jibjib-query](https://github.com/gojibjib/jibjib-query): A think Python Flask API that handles communication with the [TensorFlow Serving](https://www.tensorflow.org/serving/) instance.
+
 # An Android app for matching bird sounds
 JibJib is a mobile App for Android, which provides access to ornithology in a clear, minimalistic and playful manner.
 The app focuses on an intuitive and clear design and workflow to guide the user through the different use cases. 
