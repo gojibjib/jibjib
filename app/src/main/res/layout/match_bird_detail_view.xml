@@ -24,7 +24,7 @@
         android:layout_below="@+id/BirdPic"
         android:layout_gravity="top"
 
-        android:text="Name"
+        android:text="@string/details_view_name"
         android:textColor="@color/ciRed"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -39,7 +39,7 @@
         android:autoLink="web"
         android:maxLines="20"
         android:paddingTop="20dp"
-        android:text="URI"
+        android:text="@string/details_view_uri"
         android:textColor="@color/colorContentText"
         android:textSize="13sp" />
 
@@ -57,8 +57,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/BirdNutrition"
-            android:text="Description"
+            android:id="@+id/BirdDescription"
+            android:text="@string/details_view_description"
             android:textColor="@color/colorContentText"
             android:textSize="13sp" />
     </ScrollView>
@@ -72,6 +72,6 @@
         android:layout_centerInParent="true"
         android:textColor="#ffffff"
         android:background="@drawable/buttonshape"
-        android:text="Save" />
+        android:text="@string/details_view_save" />
 
 </RelativeLayout>
