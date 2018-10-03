@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">jibjib</string>
     <string name="app_info">
-        Thank you for using our app!
+        Danke für die Verwendung dieser App!
         &lt;br>
         &lt;br>
-                This very much a work in progress, if you find any bugs, have suggestions or would like to improve this app, please do so via Github:
+        Sie befindet sich aktuell noch in Entwicklung.
+        Für potenzielle Fehler, Verbesserungsvorschläge oder wenn Sie selber mithelfen wollen, besuchen Sie unser Github:
         &lt;br>
         &lt;br>
         &lt;a href="https://github.com/gojibjib">https://github.com/gojibjib&lt;/a>
         &lt;br>
-        &lt;br>
-        &lt;h1>Data Sources&lt;/h1>
+        &lt;h1>Datenquellen&lt;/h1>
         &lt;a href="https://ai.google/research/pubs/pub45611">Google Research: CNN Architectures for Large-Scale Audio Classification&lt;/a>
         &lt;br>
         &lt;br>
@@ -28,7 +28,7 @@
         &lt;br>
 
         &lt;h1>Special Thanks&lt;/h1>
-        We would also like to thank the following institutions for making this project possible:
+        Wir möchten uns ganz herzlich bei den folgenden Institutionen bedanken, die das Projekt ermöglichten:
         &lt;br>
         &lt;br>
 
@@ -43,22 +43,20 @@
         &lt;a href="https://www.tu-chemnitz.de/informatik">Chemnitz University of Technology&lt;/a>
         &lt;br>
         &lt;br>
-        &lt;h1>Privacy Disclaimer&lt;/h1>
-        No personal information is collected, processed or shared when using this app.
+        &lt;h1>Disclaimer&lt;/h1>
+        Mit der Nutzung dieser App werden keine persönlichen Daten gesammelt, verarbeitet oder geteilt.
         &lt;br>
-        &lt;br>
-        &lt;h1>License&lt;/h1>
-        This app and all its assets are licensed under GPLv3
+        &lt;h1>Lizenz&lt;/h1>
+        Die App sowie die zugehörige Backend-Architektur sind unter der GPLv3 lizensiert.
     </string>
-    <string name="press_and_hold">Press and hold</string>
-    <string name="your_collection_title">YOUR COLLECTION</string>
+    <string name="press_and_hold">Gedrückt halten</string>
+    <string name="your_collection_title">Deine Sammlung</string>
     <string name="details_view_name">Name</string>
     <string name="details_view_uri">URI</string>
-    <string name="details_view_description">Description</string>
-    <string name="details_view_save">Save</string>
-    <string name="bottom_nav_collection">Collection</string>
-    <string name="bottom_nav_record">Record</string>
-    <string name="bottom_nav_info">Info</string>
-    <string name="details_view_save_message">Bird saved to data base</string>
-    <string name="general_exception_text">Oops, something went wrong!\nPlease try again.</string>
+    <string name="details_view_description">Beschreibung</string>
+    <string name="details_view_save">Speichern</string>
+    <string name="bottom_nav_collection">Sammlung</string>
+    <string name="bottom_nav_record">Aufnahme</string>
+    <string name="details_view_save_message">Vogel wurde gespeichert</string>
+    <string name="general_exception_text">Ups, etwas ist schief gegangen!\nBitte erneut versuchen.</string>
 </resources>

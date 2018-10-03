@@ -21,7 +21,7 @@
         android:layout_gravity="top"
         android:paddingTop="40dp"
         android:paddingLeft="40dp"
-        android:text="YOUR COLLECTION"
+        android:text="@string/your_collection_title"
 
         android:textColor="@color/ciRed"
         android:textSize="20sp"
@@ -31,12 +31,13 @@
         android:id="@+id/list_saved_birds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="40dp"
+        android:layout_below="@+id/BirdList"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"
-        android:layout_below="@+id/BirdList" />
+        android:paddingBottom="50dp"
+        android:paddingTop="40dp" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

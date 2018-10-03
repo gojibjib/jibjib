@@ -155,6 +155,6 @@ public class BirdListView extends Activity implements IBirdListViewPresenter.Vie
 
     @Override
     public void showError(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.general_exception_text, Toast.LENGTH_LONG).show();
     }
 }

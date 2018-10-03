@@ -247,7 +247,7 @@ public class MatchView extends Activity implements IMatchViewPresenter.View, Bot
     @Override
     public void showError(String message) {
         stopMatchAnimation();
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.general_exception_text, Toast.LENGTH_LONG).show();
         birdbackground.setVisibility(View.VISIBLE);
     }
 

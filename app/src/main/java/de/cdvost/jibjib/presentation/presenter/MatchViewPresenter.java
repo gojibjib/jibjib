@@ -62,6 +62,7 @@ public class MatchViewPresenter extends AbstractPresenter
         if(fail instanceof  Exception){
             errorMessage = ((Exception) fail).getMessage();
         }
+        //TODO i18n
         view.showError("Oops, something went wrong!\n" +
                 "Please try again.");
     }
