@@ -19,6 +19,13 @@ The complete list of JibJib repos is:
 JibJib is a mobile App for Android, which provides access to ornithology in a clear, minimalistic and playful manner.
 The app focuses on an intuitive and clear design and workflow to guide the user through the different use cases. 
 
+## Getting started
+1. Clone the repository
+2. Create a new file ''gradle.properties'' in the root directory of the project.
+3. Add the property ''WEBServiceBaseURL = <url_of_the_backend>'' with the URL of the backend service.
+
+For providing your own backend service, take a look at https://github.com/gojibjib/jibjib-api and https://github.com/gojibjib/deploy.
+
 ## Application workflow
 
 ![alt Application workflow](/readme_img/jibjib_screenshots.png)
