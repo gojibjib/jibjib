@@ -24,7 +24,13 @@ The app focuses on an intuitive and clear design and workflow to guide the user 
 2. Create a new file ''gradle.properties'' in the root directory of the project.
 3. Add the property ''WEBServiceBaseURL = <url_of_the_backend>'' with the URL of the backend service.
 
-For providing your own backend service, take a look at https://github.com/gojibjib/jibjib-api and https://github.com/gojibjib/deploy.
+
+For providing your own backend service, take a look at the following repositories:
+
+* [jibjib-api](https://github.com/gojibjib/jibjib-api)
+* [deploy](https://github.com/gojibjib/deploy)
+
+Note: You can enter some dummy URL first to be able to compile and use the app. But of course, trying to match your recorded sound will result in an error message. "Oops, something went wrong"
 
 ## Application workflow
 
